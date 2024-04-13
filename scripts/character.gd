@@ -33,23 +33,30 @@ var outers = {
 }
 
 # Positions
-var target = self.position
 var waiting = Vector2(256, 512+260)
 var present = Vector2(256, 256)
 var gone = Vector2(256, -260)
+var target = waiting
 
-func choose(dict):
-	var values = dict.values()
-	return values[randi() % values.size()]
+var difficulty = 0
+var request = ["rat", "", ""]
+
+func _ready():
+	request = self.generate_request()
+	$RequestDialogue.set_dialogue(difficulty, request[0], request[1], request[2])
 
 func _process(delta):
 	self.position = lerp(self.position, target, delta)
 
-func generate_request(difficulty: int):
+func generate_request():
 	# Generate a summoning request for 0 easy, 1 medium, 2 hard
 	var is_easier = func is_easier(key):
-		return key <= difficulty
+		return key <= self.difficulty
 	var ins = inners.values().filter(is_easier)
 	var mids = middles.values().filter(is_easier)
 	var outs = outers.values().filter(is_easier)
 	return [choose(ins), choose(mids), choose(outs)]
+
+func choose(dict):
+	var values = dict.values()
+	return values[randi() % values.size()]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccbf2dadyl5nq"]
+
+[ext_resource type="Script" path="res://scripts/summoner.gd" id="1_by2su"]
+[ext_resource type="Texture2D" uid="uid://l17pjdxjua4b" path="res://textures/icons/summoning stand.png" id="2_t0ma5"]
+
+[node name="Summoner" type="Node2D"]
+script = ExtResource("1_by2su")
+
+[node name="SummoningStand" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_t0ma5")

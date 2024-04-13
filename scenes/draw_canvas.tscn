@@ -1,16 +1,21 @@
-[gd_scene load_steps=9 format=3 uid="uid://tqk0jocx46ap"]
+[gd_scene load_steps=10 format=3 uid="uid://tqk0jocx46ap"]
 
 [ext_resource type="Script" path="res://scripts/DrawCanvas.gd" id="1_3fa3r"]
 [ext_resource type="Texture2D" uid="uid://7uoqb0wqawel" path="res://textures/icons/Canvas.png" id="2_cmcjd"]
-[ext_resource type="Texture2D" uid="uid://u6msv8b55cr1" path="res://textures/icons/candle.webp" id="3_mfmyb"]
+[ext_resource type="Texture2D" uid="uid://cyeh8i06svuje" path="res://textures/icons/altar stand.png" id="2_w4cyx"]
 [ext_resource type="Texture2D" uid="uid://c5oi8l2tg4j4" path="res://textures/icons/face-skull.webp" id="4_foh33"]
 [ext_resource type="Texture2D" uid="uid://pmpgci32hxjw" path="res://textures/icons/cockroach.webp" id="5_g125e"]
+[ext_resource type="Texture2D" uid="uid://biw8m3i3xsj3b" path="res://textures/icons/sponge.png" id="6_40myk"]
 [ext_resource type="Texture2D" uid="uid://bis61b85y52kf" path="res://textures/icons/roach-jar.webp" id="6_yubuu"]
-[ext_resource type="Texture2D" uid="uid://bdcunch0swf7m" path="res://textures/icons/sponge.webp" id="7_u74px"]
+[ext_resource type="PackedScene" uid="uid://dtd87dr7ijejh" path="res://scenes/candle.tscn" id="8_jl40j"]
 [ext_resource type="Texture2D" uid="uid://78vqx2myy8s5" path="res://textures/icons/knife.png" id="8_ry5xr"]
 
 [node name="DrawCanvas" type="Node2D"]
 script = ExtResource("1_3fa3r")
+
+[node name="AltarStand" type="Sprite2D" parent="."]
+position = Vector2(253, 336)
+texture = ExtResource("2_w4cyx")
 
 [node name="Canvas" type="Sprite2D" parent="."]
 position = Vector2(256, 256)
@@ -20,33 +25,8 @@ texture = ExtResource("2_cmcjd")
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Candle2" type="Sprite2D" parent="."]
-position = Vector2(260.868, -8.49997)
-scale = Vector2(0.0712891, 0.0712891)
-texture = ExtResource("3_mfmyb")
-
-[node name="Candle3" type="Sprite2D" parent="."]
-position = Vector2(524.868, 254.5)
-scale = Vector2(0.0712891, 0.0712891)
-texture = ExtResource("3_mfmyb")
-
-[node name="Candle4" type="Sprite2D" parent="."]
-position = Vector2(272.868, 501.5)
-scale = Vector2(0.0712891, 0.0712891)
-texture = ExtResource("3_mfmyb")
-
-[node name="Candle5" type="Sprite2D" parent="."]
-position = Vector2(84.8683, 74.5001)
-scale = Vector2(0.0712891, 0.0712891)
-texture = ExtResource("3_mfmyb")
-
-[node name="Candle6" type="Sprite2D" parent="."]
-position = Vector2(445.868, 64.5)
-scale = Vector2(0.0712891, 0.0712891)
-texture = ExtResource("3_mfmyb")
-
 [node name="Face-skull2" type="Sprite2D" parent="."]
-position = Vector2(26.8683, 517.5)
+position = Vector2(-7, 534.18)
 scale = Vector2(0.201172, 0.201172)
 texture = ExtResource("4_foh33")
 
@@ -64,18 +44,30 @@ icon = ExtResource("6_yubuu")
 expand_icon = true
 
 [node name="EraserButton" type="Button" parent="."]
-offset_left = -56.0
-offset_top = 201.0
-offset_right = 52.0
-offset_bottom = 310.0
-icon = ExtResource("7_u74px")
+offset_left = -167.0
+offset_top = 208.0
+offset_right = -33.0
+offset_bottom = 304.0
+icon = ExtResource("6_40myk")
+flat = true
 expand_icon = true
 
 [node name="KnifeButton" type="Button" parent="."]
-offset_left = 45.0
-offset_top = 481.0
-offset_right = 105.0
-offset_bottom = 590.0
-rotation = -2.74516
+offset_left = 11.1317
+offset_top = 497.68
+offset_right = 71.1317
+offset_bottom = 606.68
+rotation = -3.38804
+scale = Vector2(1.37816, 1.37816)
 icon = ExtResource("8_ry5xr")
+flat = true
 expand_icon = true
+
+[node name="Candle" parent="." instance=ExtResource("8_jl40j")]
+position = Vector2(18, 14)
+
+[node name="Candle2" parent="." instance=ExtResource("8_jl40j")]
+position = Vector2(253, -73)
+
+[node name="Candle3" parent="." instance=ExtResource("8_jl40j")]
+position = Vector2(483, 5)

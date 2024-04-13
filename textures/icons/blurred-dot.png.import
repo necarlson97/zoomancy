@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdcunch0swf7m"
-path="res://.godot/imported/sponge.webp-0fadcf4544fab0118b75877c865bc85c.ctex"
+uid="uid://fnqpck37ytbj"
+path="res://.godot/imported/blurred-dot.png-ebe92e3ec7d1f5381cf0df9768282be2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/icons/sponge.webp"
-dest_files=["res://.godot/imported/sponge.webp-0fadcf4544fab0118b75877c865bc85c.ctex"]
+source_file="res://textures/icons/blurred-dot.png"
+dest_files=["res://.godot/imported/blurred-dot.png-ebe92e3ec7d1f5381cf0df9768282be2.ctex"]
 
 [params]
 

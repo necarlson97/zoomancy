@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u6msv8b55cr1"
-path="res://.godot/imported/candle.webp-085194b6344a24e4f300fe5db47ce003.ctex"
+uid="uid://5n6egyyja2q3"
+path="res://.godot/imported/fire.png-4943b9c019d398746e81c45fb94e60cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/icons/candle.webp"
-dest_files=["res://.godot/imported/candle.webp-085194b6344a24e4f300fe5db47ce003.ctex"]
+source_file="res://textures/particles/fire.png"
+dest_files=["res://.godot/imported/fire.png-4943b9c019d398746e81c45fb94e60cc.ctex"]
 
 [params]
 

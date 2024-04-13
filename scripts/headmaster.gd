@@ -40,13 +40,14 @@ func average(numbers: Array) -> float:
 	for n in numbers:
 		sum += n
 	return sum / numbers.size()
-	
+
+@onready var proctors = [$ProctorInner, $ProctorMiddle, $ProctorOuter]
 func check_all():
 	var imgs = []
 	var scores = []
 	# Unpack image name and user's score to list
-	for n in ["ProctorInner", "ProctorMiddle", "ProctorOuter"]:
-		var best = get_node(n).check()
+	for n in proctors:
+		var best = n.check()
 		imgs.append(best[0])
 		scores.append(best[1])
 	
@@ -55,7 +56,17 @@ func check_all():
 	
 	var final_score = average(scores)
 	print("Final: "+str(final_score)+" "+str(imgs))
+	return imgs + [final_score]
+
+@onready var creature = preload("res://scenes/creature.tscn")
+func evauluate_creature():
+	var features = self.check_all()
+	var inner = features[0]
+	var middle = features[1]
+	var outer = features[2]
 	
-func summon(imgs, score):
-	# Summon the creature, with all it's stuff, and add to score, etc
-	print("Summoning with "+str(imgs)+" "+str(score))
+	var new_creature = creature.instantiate()
+	new_creature.visible = false
+	new_creature.set_features(inner, middle, outer)
+	return new_creature
+	

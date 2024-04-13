@@ -15,7 +15,7 @@ var is_typing = false
 
 func _ready():
 	$Button.pressed.connect(self.next_click)
-	#$FinalButton.pressed.connect(self.on_final)
+	$FinalButton.pressed.connect(self.on_final)
 	start_typing()
 
 func _process(delta):
@@ -40,7 +40,7 @@ func next_click():
 	# Move to next dialogue
 	current_dialogue_index += 1
 	start_typing()
-	if current_dialogue_index >= dialogues.size():
+	if current_dialogue_index >= dialogues.size()-1:
 		$Button.visible = false
 		$FinalButton.visible = true
 

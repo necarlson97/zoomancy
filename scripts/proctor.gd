@@ -53,9 +53,9 @@ func check():
 			best_image_name = sub_name.split('- ')[-1]
 		
 	# For the closest matching image, show it in 'BestRect'
-	$BestRect.texture = ImageTexture.create_from_image(best_image)
-	# Just for testing
 	if best_image != null:
+		$BestRect.texture = ImageTexture.create_from_image(best_image)
+		# Just for testing
 		best_image.save_png("res://temp_best.png")
 	# Also, print it's closeness_score
 	print("best: "+best_image_name+" "+str(best_score))
@@ -63,7 +63,6 @@ func check():
 	
 func create_from_mask(image, mask):
 	var result_image = Image.create(image.get_width(), image.get_height(), false, Image.FORMAT_RGBA8)
-	
 	for x in range(image.get_width()):
 		for y in range(image.get_height()):
 			var mask_pixel = mask.get_pixel(x, y)
@@ -75,6 +74,8 @@ func create_from_mask(image, mask):
 	return result_image
 
 func compare_images(user_image, mask_image):
+	user_image = reduce_image_resolution(user_image)
+	mask_image = reduce_image_resolution(mask_image)
 	var score = 0.0
 	var total_red = 0
 	for x in range(user_image.get_width()):
@@ -86,3 +87,9 @@ func compare_images(user_image, mask_image):
 				if user_pixel == Color.WHITE:
 					score += 1
 	return score / total_red
+
+func reduce_image_resolution(image, scale_factor=0.5):
+	var new_width = int(image.get_width() * scale_factor)
+	var new_height = int(image.get_height() * scale_factor)
+	image.resize(new_width, new_height)
+	return image
