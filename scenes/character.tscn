@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtu7ngde8sjut"]
+
+[ext_resource type="Script" path="res://scripts/character.gd" id="1_2djju"]
+[ext_resource type="Texture2D" uid="uid://cm0qnojv1nlom" path="res://textures/characters/satyr.webp" id="2_fnijc"]
+[ext_resource type="PackedScene" uid="uid://bvqghfmgh4b6d" path="res://scenes/request_dialogue.tscn" id="3_350x0"]
+
+[node name="Character" type="Node2D"]
+script = ExtResource("1_2djju")
+
+[node name="Satyr" type="Sprite2D" parent="."]
+position = Vector2(256, 256)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_fnijc")
+
+[node name="RequestDialogue" parent="." instance=ExtResource("3_350x0")]
+position = Vector2(4, 514)

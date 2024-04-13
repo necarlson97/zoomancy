@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvqghfmgh4b6d"]
+
+[ext_resource type="PackedScene" uid="uid://di642ovb0hqgs" path="res://scenes/dialogue.tscn" id="1_sjse4"]
+
+[node name="RequestDialogue" instance=ExtResource("1_sjse4")]
+
+[node name="DialogueBox" parent="." index="0"]
+flip_h = true
+
+[node name="Label" parent="." index="1"]
+text = "Hello! Testing"
+
+[node name="Button" parent="." index="2"]
+offset_left = 442.0
+offset_right = 490.0
+text = "Check"

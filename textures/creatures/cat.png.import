@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5oi8l2tg4j4"
-path="res://.godot/imported/face-skull.webp-5a163f4087df7a1b63bef86eb1888e52.ctex"
+uid="uid://dq1vxqcraoqhr"
+path="res://.godot/imported/cat.png-9ba1ca41bdf005c586faa3c1b9164f09.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/face-skull.webp"
-dest_files=["res://.godot/imported/face-skull.webp-5a163f4087df7a1b63bef86eb1888e52.ctex"]
+source_file="res://textures/creatures/cat.png"
+dest_files=["res://.godot/imported/cat.png-9ba1ca41bdf005c586faa3c1b9164f09.ctex"]
 
 [params]
 

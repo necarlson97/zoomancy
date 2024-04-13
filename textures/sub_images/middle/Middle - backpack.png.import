@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://x25fx8tpoow2"
-path="res://.godot/imported/solid-color-image.png-7cf92829c6ed12672ed729ebf51f204f.ctex"
+uid="uid://kyiwr8xitr4"
+path="res://.godot/imported/Middle - backpack.png-9130146677a71afe68481c01c748ee9a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/solid-color-image.png"
-dest_files=["res://.godot/imported/solid-color-image.png-7cf92829c6ed12672ed729ebf51f204f.ctex"]
+source_file="res://textures/sub_images/middle/Middle - backpack.png"
+dest_files=["res://.godot/imported/Middle - backpack.png-9130146677a71afe68481c01c748ee9a.ctex"]
 
 [params]
 

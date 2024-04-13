@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://x0dycfoom8ks"]
+
+[ext_resource type="PackedScene" uid="uid://tqk0jocx46ap" path="res://scenes/DrawCanvas.tscn" id="1_mvwhm"]
+[ext_resource type="PackedScene" uid="uid://di642ovb0hqgs" path="res://scenes/dialogue.tscn" id="2_dkdi6"]
+[ext_resource type="PackedScene" uid="uid://stujdc35tdyk" path="res://scenes/headmaster.tscn" id="3_6sp8r"]
+
+[node name="Main" type="Node2D"]
+
+[node name="DrawCanvas" parent="." instance=ExtResource("1_mvwhm")]
+position = Vector2(18, 18)
+
+[node name="Dialogue" parent="." instance=ExtResource("2_dkdi6")]
+position = Vector2(31, 526)
+
+[node name="Headmaster" parent="." instance=ExtResource("3_6sp8r")]
+position = Vector2(601, 18)

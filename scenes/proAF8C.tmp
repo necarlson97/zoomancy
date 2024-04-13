@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsbc74b7vwac1"]
+
+[ext_resource type="Script" path="res://scripts/proctor.gd" id="1_gv6e6"]
+[ext_resource type="Texture2D" uid="uid://xl2bkj8bv5o6" path="res://textures/sub_images/Inner Canvas.png" id="2_s48l0"]
+[ext_resource type="Texture2D" uid="uid://x25fx8tpoow2" path="res://textures/icons/solid-color-image.png" id="7_j683l"]
+
+[node name="Proctor" type="Node2D"]
+script = ExtResource("1_gv6e6")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 170.0
+offset_bottom = 170.0
+texture = ExtResource("2_s48l0")
+expand_mode = 1
+
+[node name="UserRect" type="TextureRect" parent="."]
+offset_left = 169.0
+offset_top = 1.0
+offset_right = 254.0
+offset_bottom = 86.0
+texture = ExtResource("7_j683l")
+expand_mode = 1
+
+[node name="BestRect" type="TextureRect" parent="."]
+offset_left = 169.0
+offset_top = 86.0
+offset_right = 254.0
+offset_bottom = 171.0
+texture = ExtResource("7_j683l")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="."]
+offset_left = 1.0
+offset_top = 134.0
+offset_right = 56.0
+offset_bottom = 165.0
+text = "Check"

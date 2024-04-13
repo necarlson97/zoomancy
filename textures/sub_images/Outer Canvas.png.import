@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bis61b85y52kf"
-path="res://.godot/imported/roach-jar.webp-3b3b0b6f623ca276be802ca97d2bb461.ctex"
+uid="uid://cmeagj288c8si"
+path="res://.godot/imported/Outer Canvas.png-3cda04ff1760d8c1b5bb229ba487a5e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/roach-jar.webp"
-dest_files=["res://.godot/imported/roach-jar.webp-3b3b0b6f623ca276be802ca97d2bb461.ctex"]
+source_file="res://textures/sub_images/Outer Canvas.png"
+dest_files=["res://.godot/imported/Outer Canvas.png-3cda04ff1760d8c1b5bb229ba487a5e8.ctex"]
 
 [params]
 

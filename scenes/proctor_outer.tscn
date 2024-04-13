@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://daaaxd1rjj1ha"]
+
+[ext_resource type="PackedScene" uid="uid://dsbc74b7vwac1" path="res://scenes/proctor.tscn" id="1_ksv4d"]
+[ext_resource type="Texture2D" uid="uid://cmeagj288c8si" path="res://textures/sub_images/Outer Canvas.png" id="2_euhsd"]
+
+[node name="Proctor" instance=ExtResource("1_ksv4d")]
+
+[node name="TextureRect" parent="." index="0"]
+texture = ExtResource("2_euhsd")

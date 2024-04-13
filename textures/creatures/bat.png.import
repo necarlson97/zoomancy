@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pmpgci32hxjw"
-path="res://.godot/imported/cockroach.webp-56f54e13f60db0321f8f426361c5e820.ctex"
+uid="uid://bmrq8445m5jvl"
+path="res://.godot/imported/bat.png-9bab4f3219b1dab87b6617af299b2ca8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/cockroach.webp"
-dest_files=["res://.godot/imported/cockroach.webp-56f54e13f60db0321f8f426361c5e820.ctex"]
+source_file="res://textures/creatures/bat.png"
+dest_files=["res://.godot/imported/bat.png-9bab4f3219b1dab87b6617af299b2ca8.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdx2q2srdpml3"
-path="res://.godot/imported/knife.webp-7a189eccfc687d080759e72c629a27aa.ctex"
+uid="uid://dqhsk0nmdl0km"
+path="res://.godot/imported/Inner - bird.png-6e8c55f3bfb010533b655158efd81090.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/knife.webp"
-dest_files=["res://.godot/imported/knife.webp-7a189eccfc687d080759e72c629a27aa.ctex"]
+source_file="res://textures/sub_images/inner/Inner - bird.png"
+dest_files=["res://.godot/imported/Inner - bird.png-6e8c55f3bfb010533b655158efd81090.ctex"]
 
 [params]
 
