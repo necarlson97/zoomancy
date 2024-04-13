@@ -32,6 +32,19 @@ extends Node2D
 # electic - 8 poly - hard
 # icy - 8 star - hard
 
+class CreatureFeatures:
+	var inner = "Blob"
+	var middle = ""
+	var outer = ""
+	var score = 0.0
+	
+	func _init(features: Array, score: float):
+		if features.size() >= 3:
+			self.inner = features[0]
+			self.middle = features[1]
+			self.outer = features[2]
+		self.score = score
+
 func _ready():
 	$Button.pressed.connect(self.check_all)
 
@@ -43,30 +56,28 @@ func average(numbers: Array) -> float:
 
 @onready var proctors = [$ProctorInner, $ProctorMiddle, $ProctorOuter]
 func check_all():
-	var imgs = []
+	var names = []
 	var scores = []
 	# Unpack image name and user's score to list
 	for n in proctors:
 		var best = n.check()
-		imgs.append(best[0])
-		scores.append(best[1])
+		names.append(best.name)
+		scores.append(best.score)
 	
-	if imgs[0] == "":
-		imgs[0] = "blob"
+	if names[0] == "":
+		names[0] = "blob"
 	
 	var final_score = average(scores)
-	print("Final: "+str(final_score)+" "+str(imgs))
-	return imgs + [final_score]
+	print("Final: "+str(final_score)+" "+str(names))
+	
+	# pack to send off
+	return CreatureFeatures.new(names, final_score)
 
 @onready var creature = preload("res://scenes/creature.tscn")
 func evauluate_creature():
 	var features = self.check_all()
-	var inner = features[0]
-	var middle = features[1]
-	var outer = features[2]
-	
 	var new_creature = creature.instantiate()
-	new_creature.visible = false
-	new_creature.set_features(inner, middle, outer)
+	#new_creature.visible = false
+	new_creature.set_features(features.inner, features.middle, features.outer)
 	return new_creature
 	

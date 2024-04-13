@@ -15,8 +15,7 @@ func check_candles():
 			return
 	summon()
 	for candle in candles:
-		candle.lit = false
-		candle.set_light()
+		candle.slow_unlight()
 
 @onready var headmaster = get_parent().get_node("Headmaster")
 func summon():

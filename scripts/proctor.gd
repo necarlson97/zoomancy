@@ -3,8 +3,25 @@ extends Node2D
 # Dict of name->image
 var sub_images = {}
 
+var thread = Thread.new()
+var stop_thread = false
+
+# A candatate for which image fits best
+class BestFit:
+	var score = 0.1
+	var image = null
+	var name = ""
+var current_best_fit = BestFit.new()
+
+# Get and dispaly user/mask and whatnot
+@onready var user_texture = get_tree().root.get_node("Main/DrawCanvas/TextureRect")
+@onready var user_display = $UserRect
+@onready var mask_display = $TextureRect
+@onready var best_display = $BestRect
+
 func _ready():
 	$Button.pressed.connect(self.check)
+	thread.start(self.update_best_fit)
 	load_sub_images()
 	
 func load_sub_images():
@@ -23,44 +40,57 @@ func load_sub_images():
 	print(sub_images)
 
 func check():
+	# Compare those desired pixels with an existing list of sub-images,
+	# to find out which it is closest to, and how 'far off' the pixles are
+	var best_fit = get_current_best_fit()
+	# For the pixels in the deisred region, show them on the 'UserRect'
+	#user_display.texture = ImageTexture.create_from_image(get_user_image())
+	# For the closest matching image, show it in 'BestRect'
+	if best_fit.image != null:
+		best_display.texture = ImageTexture.create_from_image(best_fit.image)
+		# Just for testing
+		#best_fit.image.save_png("res://temp_best.png")
+	# Also, print it's closeness_score
+	print("best: "+best_fit.name+" "+str(best_fit.score))
+	return best_fit
+	
+func get_current_best_fit():
+	return current_best_fit
+
+func _exit_tree():
+	stop_thread = true
+	thread.wait_to_finish()
+	
+
+func get_user_image():
 	# Get the current user image from the DrawCanvas -> TextureTect
-	var user_texture = get_tree().root.get_node("Main/DrawCanvas/TextureRect")
 	var user_image = user_texture.get_texture().get_image()
+	# Just for testing
+	#user_image.save_png("res://temp_user_pixels.png")
 	
 	# 'and' the pixels with our black&white image showing the desired region,
 	# to isolate the desired pixels
-	var desired_region = $TextureRect.get_texture().get_image()
-	var user_pixels = create_from_mask(desired_region, user_image)
-	
-	# Just for testing
-	user_pixels.save_png("res://temp_user_pixels.png")
-	
-	# For the pixels in the deisred region, show them on the 'UserRect'
-	$UserRect.texture = ImageTexture.create_from_image(user_pixels)
-	
-	# Compare those desired pixels with an existing list of sub-images,
-	# to find out which it is closest to, and how 'far off' the pixles are
-	var best_score = 0.1
-	var best_image = null
-	var best_image_name = ""
+	var desired_region = mask_display.get_texture().get_image()
+	return create_from_mask(desired_region, user_image)
+
+func update_best_fit():
+	while not stop_thread:
+		current_best_fit = find_best_fit()
+		OS.delay_msec(100)  # Delay to prevent hogging CPU resources
+		
+func find_best_fit() -> BestFit:
+	var user_image = get_user_image()
+	var best_fit = BestFit.new()
 	for sub_name in sub_images:
 		var sub_image = sub_images[sub_name]
-		var score = compare_images(user_pixels, sub_image)
-		print("Comapring to "+str(sub_name)+" = "+str(score))
-		if score > best_score:
-			best_score = score
-			best_image = sub_image
-			best_image_name = sub_name.split('- ')[-1]
-		
-	# For the closest matching image, show it in 'BestRect'
-	if best_image != null:
-		$BestRect.texture = ImageTexture.create_from_image(best_image)
-		# Just for testing
-		best_image.save_png("res://temp_best.png")
-	# Also, print it's closeness_score
-	print("best: "+best_image_name+" "+str(best_score))
-	return [best_image_name, best_score]
-	
+		var score = compare_images(user_image, sub_image)
+		#print("Comapring to "+str(sub_name)+" = "+str(score))
+		if score > best_fit.score:
+			best_fit.score = score
+			best_fit.image = sub_image
+			best_fit.name = sub_name.split('- ')[-1]
+	return best_fit
+
 func create_from_mask(image, mask):
 	var result_image = Image.create(image.get_width(), image.get_height(), false, Image.FORMAT_RGBA8)
 	for x in range(image.get_width()):
@@ -74,8 +104,10 @@ func create_from_mask(image, mask):
 	return result_image
 
 func compare_images(user_image, mask_image):
-	user_image = reduce_image_resolution(user_image)
-	mask_image = reduce_image_resolution(mask_image)
+	#user_image = reduce_image_resolution(user_image)
+	#mask_image = reduce_image_resolution(mask_image)
+	#print("User image "+str(user_image))
+	#print("Mask image "+str(mask_image))
 	var score = 0.0
 	var total_red = 0
 	for x in range(user_image.get_width()):
