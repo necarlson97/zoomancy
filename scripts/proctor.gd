@@ -1,27 +1,26 @@
 extends Node2D
 
-var sub_textures: Array[Texture] = []
+# Dict of name->image
+var sub_images = {}
 
 func _ready():
 	$Button.pressed.connect(self.check)
-	sub_textures = load_sub_textures()
+	load_sub_images()
 	
-func load_sub_textures() -> Array[Texture]:
+func load_sub_images():
 	# Get all images for inner/outer/etc
 	var region_name = name.replace("Proctor", "")
 	var path = "res://textures/sub_images/"+region_name+"/"
-	var texs: Array[Texture]
 	var dir = DirAccess.open(path)
 	dir.list_dir_begin()
 	var file_name = dir.get_next()  
 	while file_name != "":
 		var img = Image.new()
 		if img.load(path+file_name) == OK:
-			var tex = ImageTexture.create_from_image(img)
-			texs.append(tex)
-			print("Loaded: "+region_name+" "+file_name+" - "+tex.get_path().get_file())
+			sub_images[file_name.replace('.png', '')] = img
+			print("Loaded: "+region_name+" "+file_name)
 		file_name = dir.get_next()
-	return texs
+	print(sub_images)
 
 func check():
 	# Get the current user image from the DrawCanvas -> TextureTect
@@ -43,16 +42,15 @@ func check():
 	# to find out which it is closest to, and how 'far off' the pixles are
 	var best_score = 0.1
 	var best_image = null
-	var best_image_name = "blob"
-	for tex in sub_textures:
-		var sub_name = tex.get_path().get_file()
-		var sub_image = tex.get_image()
+	var best_image_name = ""
+	for sub_name in sub_images:
+		var sub_image = sub_images[sub_name]
 		var score = compare_images(user_pixels, sub_image)
 		print("Comapring to "+str(sub_name)+" = "+str(score))
 		if score > best_score:
 			best_score = score
 			best_image = sub_image
-			best_image_name = sub_name.split('- ')[-1].replace('.png', '')
+			best_image_name = sub_name.split('- ')[-1]
 		
 	# For the closest matching image, show it in 'BestRect'
 	$BestRect.texture = ImageTexture.create_from_image(best_image)

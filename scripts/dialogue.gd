@@ -12,10 +12,10 @@ var is_typing = false
 
 # Nodes
 @onready var text_label = $Label
-@onready var next_button = $Button
 
 func _ready():
-	next_button.pressed.connect(self.next_click)
+	$Button.pressed.connect(self.next_click)
+	#$FinalButton.pressed.connect(self.on_final)
 	start_typing()
 
 func _process(delta):
@@ -35,13 +35,19 @@ func next_click():
 		chars_displayed = dialogues[current_dialogue_index].length()
 		text_label.text = dialogues[current_dialogue_index]
 		is_typing = false
-	else:
-		# Move to next dialogue
-		current_dialogue_index += 1
-		if current_dialogue_index < dialogues.size():
-			start_typing()
-		else:
-			queue_free()  # Remove the dialogue system from the scene
+		return
+
+	# Move to next dialogue
+	current_dialogue_index += 1
+	start_typing()
+	if current_dialogue_index >= dialogues.size():
+		$Button.visible = false
+		$FinalButton.visible = true
+
+func on_final():
+	# Remove the dialogue system from the scene
+	# (will get shadowed by children
+	queue_free()
 
 func start_typing():
 	chars_displayed = 0

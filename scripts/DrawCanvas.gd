@@ -30,6 +30,7 @@ func _ready():
 	
 func clear():
 	draw_image.fill(bg_color)
+	draw_texture.set_image(draw_image)
 	
 # TODO have knife/eraser follow player, and lerp home when not equipped
 func equip_eraser():

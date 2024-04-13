@@ -1,8 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtu7ngde8sjut"]
+[gd_scene load_steps=5 format=3 uid="uid://dtu7ngde8sjut"]
 
 [ext_resource type="Script" path="res://scripts/character.gd" id="1_2djju"]
 [ext_resource type="Texture2D" uid="uid://cm0qnojv1nlom" path="res://textures/characters/satyr.webp" id="2_fnijc"]
 [ext_resource type="PackedScene" uid="uid://bvqghfmgh4b6d" path="res://scenes/request_dialogue.tscn" id="3_350x0"]
+
+[sub_resource type="GDScript" id="GDScript_k1b14"]
+script/source = "extends Sprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [node name="Character" type="Node2D"]
 script = ExtResource("1_2djju")
@@ -11,6 +25,7 @@ script = ExtResource("1_2djju")
 position = Vector2(256, 256)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_fnijc")
+script = SubResource("GDScript_k1b14")
 
 [node name="RequestDialogue" parent="." instance=ExtResource("3_350x0")]
 position = Vector2(4, 514)

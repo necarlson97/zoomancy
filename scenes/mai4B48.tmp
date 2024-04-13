@@ -12,5 +12,5 @@ position = Vector2(18, 18)
 [node name="Headmaster" parent="." instance=ExtResource("3_6sp8r")]
 position = Vector2(601, 18)
 
-[node name="Tutorial" parent="." instance=ExtResource("3_5glmx")]
-position = Vector2(11, 531)
+[node name="Dialogue" parent="." instance=ExtResource("3_5glmx")]
+position = Vector2(11, 514)

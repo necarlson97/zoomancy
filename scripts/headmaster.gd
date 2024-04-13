@@ -50,6 +50,9 @@ func check_all():
 		imgs.append(best[0])
 		scores.append(best[1])
 	
+	if imgs[0] == "":
+		imgs[0] = "blob"
+	
 	var final_score = average(scores)
 	print("Final: "+str(final_score)+" "+str(imgs))
 	
