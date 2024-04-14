@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpj2010t3k47n"]
+
+[ext_resource type="Script" path="res://scripts/codex.gd" id="1_nny6r"]
+[ext_resource type="Texture2D" uid="uid://vstnakx404ug" path="res://textures/icons/tall scroll.png" id="2_ey4y3"]
+
+[node name="Codex" type="Node2D"]
+script = ExtResource("1_nny6r")
+
+[node name="TallScroll" type="Sprite2D" parent="."]
+position = Vector2(150, 300)
+texture = ExtResource("2_ey4y3")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = 49.0
+offset_top = 60.0
+offset_right = 249.0
+offset_bottom = 573.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 3

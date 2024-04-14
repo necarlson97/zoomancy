@@ -11,6 +11,7 @@ scale = Vector2(0.363281, 0.363281)
 texture = ExtResource("1_x5a77")
 
 [node name="fg" type="Sprite2D" parent="."]
+self_modulate = Color(0.729412, 0.658824, 0.596078, 1)
 scale = Vector2(0.320313, 0.320313)
 texture = ExtResource("1_x5a77")
 script = ExtResource("1_bsake")

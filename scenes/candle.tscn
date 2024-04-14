@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtd87dr7ijejh"]
+[gd_scene load_steps=13 format=3 uid="uid://dtd87dr7ijejh"]
 
 [ext_resource type="Script" path="res://scripts/candle.gd" id="1_hxlx6"]
 [ext_resource type="Texture2D" uid="uid://b8bxv0dx72b6q" path="res://textures/icons/candle.png" id="2_lnf4o"]
 [ext_resource type="Texture2D" uid="uid://fnqpck37ytbj" path="res://textures/icons/blurred-dot.png" id="3_2lvy5"]
-[ext_resource type="Texture2D" uid="uid://5n6egyyja2q3" path="res://textures/particles/fire.png" id="4_k18rf"]
+[ext_resource type="Texture2D" uid="uid://5n6egyyja2q3" path="res://textures/particles/flaming.png" id="4_k18rf"]
+[ext_resource type="AudioStream" uid="uid://dswxddlam53km" path="res://audio/sfx/hiss.wav" id="5_ddqro"]
+[ext_resource type="AudioStream" uid="uid://b63w75r6krosb" path="res://audio/sfx/hiss2.wav" id="6_ljeou"]
+[ext_resource type="AudioStream" uid="uid://c0t4fbkqm6bhq" path="res://audio/sfx/hiss3.wav" id="7_farpq"]
+[ext_resource type="AudioStream" uid="uid://c3obgchu5y1qj" path="res://audio/sfx/hiss4.wav" id="8_puopp"]
 
 [sub_resource type="Curve" id="Curve_0fdca"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.996139, 0), 0.0, 0.0, 0, 0]
@@ -20,6 +24,18 @@ direction = Vector3(0, 1, 0)
 gravity = Vector3(0, -30, 0)
 scale_min = 0.5
 scale_curve = SubResource("CurveTexture_ed38q")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7y5x5"]
+random_pitch = 1.2
+streams_count = 4
+stream_0/stream = ExtResource("5_ddqro")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("6_ljeou")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("7_farpq")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("8_puopp")
+stream_3/weight = 1.0
 
 [node name="Candle" type="Node2D"]
 script = ExtResource("1_hxlx6")
@@ -49,3 +65,6 @@ lifetime = 2.0
 explosiveness = 0.1
 randomness = 1.0
 visibility_rect = Rect2(-100, -100, 200, 300)
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_7y5x5")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://tqk0jocx46ap"]
+[gd_scene load_steps=21 format=3 uid="uid://tqk0jocx46ap"]
 
 [ext_resource type="Script" path="res://scripts/draw_canvas.gd" id="1_3fa3r"]
 [ext_resource type="Texture2D" uid="uid://7uoqb0wqawel" path="res://textures/icons/Canvas.png" id="2_cmcjd"]
@@ -7,7 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://i83glnonw051" path="res://textures/icons/roach.png" id="5_52a43"]
 [ext_resource type="PackedScene" uid="uid://dtd87dr7ijejh" path="res://scenes/candle.tscn" id="8_jl40j"]
 [ext_resource type="PackedScene" uid="uid://drcw3lqturd3q" path="res://scenes/knife.tscn" id="8_lxhcr"]
+[ext_resource type="AudioStream" uid="uid://cyxru0e3irb7p" path="res://audio/sfx/drag2.wav" id="9_m2agf"]
 [ext_resource type="PackedScene" uid="uid://d1vn3pj2lg754" path="res://scenes/sponge.tscn" id="10_d73df"]
+[ext_resource type="AudioStream" uid="uid://chuom3o70gsgh" path="res://audio/sfx/drag3.wav" id="10_l6aol"]
+[ext_resource type="AudioStream" uid="uid://uowx46rt4id7" path="res://audio/sfx/drag.wav" id="11_es4ya"]
+[ext_resource type="AudioStream" uid="uid://b5lkcfbh45q8q" path="res://audio/sfx/splat2.wav" id="12_xswyc"]
+[ext_resource type="AudioStream" uid="uid://cgmvvvfqkmeob" path="res://audio/sfx/splat.wav" id="13_g3fei"]
+[ext_resource type="AudioStream" uid="uid://b08g32b3spigs" path="res://audio/sfx/roaches.mp3" id="14_dqr6h"]
 
 [sub_resource type="Curve" id="Curve_7kxie"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.173745, 1), 0.0, 0.0, 0, 0, Vector2(0.833977, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -18,8 +24,8 @@ curve = SubResource("Curve_7kxie")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tcprp"]
 particle_flag_disable_z = true
-angle_min = 30.0
-angle_max = 60.0
+angle_min = 210.0
+angle_max = 270.0
 direction = Vector3(-1, -0.5, 0)
 initial_velocity_min = 500.0
 initial_velocity_max = 500.0
@@ -27,6 +33,30 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.4
 scale_max = 0.4
 scale_curve = SubResource("CurveTexture_yx3tt")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3gas8"]
+random_pitch = 1.38
+streams_count = 3
+stream_0/stream = ExtResource("9_m2agf")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("10_l6aol")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("11_es4ya")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nqfyp"]
+random_pitch = 1.38
+streams_count = 2
+stream_0/stream = ExtResource("12_xswyc")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("13_g3fei")
+stream_1/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jrft0"]
+random_pitch = 1.38
+streams_count = 1
+stream_0/stream = ExtResource("14_dqr6h")
+stream_0/weight = 1.0
 
 [node name="DrawCanvas" type="Node2D"]
 script = ExtResource("1_3fa3r")
@@ -54,6 +84,7 @@ expand_icon = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="ClearButton"]
 position = Vector2(118, 32)
+rotation = -2.8831
 emitting = false
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_tcprp")
@@ -75,3 +106,12 @@ position = Vector2(-103, 263)
 
 [node name="KnifeHolder" parent="." instance=ExtResource("8_lxhcr")]
 position = Vector2(-63, 565)
+
+[node name="DrawAudio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_3gas8")
+
+[node name="EraseAudio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_nqfyp")
+
+[node name="ClearAudio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_jrft0")

@@ -17,12 +17,11 @@ var inners = {
 var middles = {
 	"": 0,
 	"hat": 0,
-	"angel": 0,
-	"devil": 0,
+	"angel": 1,
+	"devil": 1,
 	"backpack": 1,
 	"horns": 1,
 	"antlers": 1,
-	"horns antlers wings": 2,
 }
 var outers = {
 	"": 0,
@@ -59,7 +58,7 @@ func _ready():
 func load_images():
 	if images != []:
 		return images
-	var path = "res://textures/characters/"
+	var path = ProjectSettings.globalize_path("res://textures/characters/")
 	var dir = DirAccess.open(path)
 	dir.list_dir_begin()
 	var file_name = dir.get_next()  
@@ -73,11 +72,9 @@ func load_images():
 	
 func get_new_difficulty():
 	var successes = get_parent().get_node("Referee").res['good']
-	var max_difficulty = int(successes / 4)
+	var max_difficulty = int(successes / 3)
 	print("max_difficulty: "+str(max_difficulty))
-	if max_difficulty == 0:
-		return 0
-	return randi() % max_difficulty
+	return clamp(max_difficulty, 0, 2)
 
 func _process(delta):
 	position = lerp(position, target, delta * speed)
@@ -102,7 +99,10 @@ func filter_dict(dict, predicate):
 func choose(arr):
 	return arr[randi() % arr.size()]
 
+var held_creature = null
 func go_away():
+	if (held_creature):
+		held_creature.queue_free()
 	target = gone
 	await get_tree().create_timer(1).timeout
 	queue_free()

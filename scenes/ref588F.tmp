@@ -1,0 +1,95 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwlxyqf18tvea"]
+
+[ext_resource type="Script" path="res://scripts/referee.gd" id="1_jr1f7"]
+[ext_resource type="Texture2D" uid="uid://biimlbc8fr53o" path="res://textures/icons/scroll.png" id="2_wqxg0"]
+[ext_resource type="Theme" uid="uid://6dtyrbnu1tf6" path="res://new_theme.tres" id="3_xa2jy"]
+[ext_resource type="PackedScene" uid="uid://ce7t04b2jdvhe" path="res://scenes/completion_light.tscn" id="4_yxpvw"]
+
+[node name="Referee" type="Node2D"]
+script = ExtResource("1_jr1f7")
+
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="1" parent="Lights" instance=ExtResource("4_yxpvw")]
+position = Vector2(402, 868)
+
+[node name="2" parent="Lights" instance=ExtResource("4_yxpvw")]
+position = Vector2(442, 868)
+
+[node name="3" parent="Lights" instance=ExtResource("4_yxpvw")]
+position = Vector2(481, 869)
+
+[node name="4" parent="Lights" instance=ExtResource("4_yxpvw")]
+position = Vector2(518, 870)
+
+[node name="5" parent="Lights" instance=ExtResource("4_yxpvw")]
+position = Vector2(553, 870)
+
+[node name="6" parent="Lights" instance=ExtResource("4_yxpvw")]
+position = Vector2(590, 870)
+
+[node name="7" parent="Lights" instance=ExtResource("4_yxpvw")]
+position = Vector2(626, 871)
+
+[node name="8" parent="Lights" instance=ExtResource("4_yxpvw")]
+position = Vector2(664, 872)
+
+[node name="9" parent="Lights" instance=ExtResource("4_yxpvw")]
+position = Vector2(700, 870)
+
+[node name="10" parent="Lights" instance=ExtResource("4_yxpvw")]
+position = Vector2(735, 871)
+
+[node name="OnScreen" type="Node2D" parent="."]
+position = Vector2(720, 450)
+
+[node name="Button" type="Button" parent="."]
+offset_left = 313.0
+offset_top = 856.0
+offset_right = 379.0
+offset_bottom = 884.0
+theme = ExtResource("3_xa2jy")
+text = "progress"
+
+[node name="Scroll" type="Sprite2D" parent="."]
+light_mask = 0
+z_index = 1
+position = Vector2(674, 1392)
+texture = ExtResource("2_wqxg0")
+
+[node name="Button" type="Button" parent="Scroll"]
+offset_left = -145.0
+offset_top = 320.0
+offset_right = 170.0
+offset_bottom = 410.0
+theme = ExtResource("3_xa2jy")
+theme_override_font_sizes/font_size = 55
+text = "Keep playing?"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Scroll"]
+offset_left = -247.0
+offset_top = -332.0
+offset_right = 247.0
+offset_bottom = 314.0
+theme = ExtResource("3_xa2jy")
+theme_override_colors/default_color = Color(0.298039, 0.301961, 0.301961, 1)
+theme_override_font_sizes/normal_font_size = 45
+bbcode_enabled = true
+text = "Test Test Test Test Test Test Test Test Test Test Test Test Test "
+fit_content = true
+
+[node name="HappyButton" type="Button" parent="."]
+visible = false
+offset_left = 760.0
+offset_top = 859.0
+offset_right = 778.0
+offset_bottom = 890.0
+text = ":)"
+
+[node name="SadButton" type="Button" parent="."]
+visible = false
+offset_left = 761.0
+offset_top = 822.0
+offset_right = 779.0
+offset_bottom = 855.0
+text = ":("

@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://43jrniauw6sx"]
+
+[ext_resource type="PackedScene" uid="uid://di642ovb0hqgs" path="res://scenes/dialogue.tscn" id="1_mdnl5"]
+[ext_resource type="Script" path="res://scripts/tutorial.gd" id="2_s4r2o"]
+[ext_resource type="Texture2D" uid="uid://cjxfhjbf51ice" path="res://textures/icons/example rat.png" id="3_b8okk"]
+[ext_resource type="Theme" uid="uid://6dtyrbnu1tf6" path="res://new_theme.tres" id="3_iw5fa"]
+[ext_resource type="Texture2D" uid="uid://dhih603xl6oeh" path="res://textures/icons/example bird.png" id="5_o1tjs"]
+[ext_resource type="Script" path="res://scripts/soft_pulse.gd" id="6_q8t6d"]
+
+[node name="Tutorial" instance=ExtResource("1_mdnl5")]
+script = ExtResource("2_s4r2o")
+
+[node name="FinalButton" parent="." index="3"]
+text = "check"
+
+[node name="SkipButton" type="Button" parent="." index="4"]
+offset_left = 14.0
+offset_top = 118.0
+offset_right = 84.0
+offset_bottom = 141.0
+theme = ExtResource("3_iw5fa")
+theme_override_font_sizes/font_size = 12
+text = "Skip Tutorial"
+
+[node name="ExampleRat" type="Sprite2D" parent="." index="5"]
+modulate = Color(1, 1, 1, 0.321569)
+position = Vector2(106, -132)
+texture = ExtResource("3_b8okk")
+script = ExtResource("6_q8t6d")
+
+[node name="ExampleBird" type="Sprite2D" parent="." index="6"]
+modulate = Color(1, 1, 1, 0.321569)
+position = Vector2(-77, 48)
+texture = ExtResource("5_o1tjs")
+script = ExtResource("6_q8t6d")

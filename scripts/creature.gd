@@ -11,6 +11,8 @@ func _ready():
 	
 func _process(delta):
 	if character != null:
+		# TODO gross, for deleting them later
+		character.held_creature = self
 		var holster = character.get_node("Holster")
 		global_position = lerp(global_position, holster.global_position, delta * speed)
 	scale = lerp(scale, Vector2(1, 1) * target_scale, delta*3)

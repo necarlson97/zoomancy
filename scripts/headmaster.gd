@@ -62,3 +62,8 @@ func evauluate_creature():
 	new_creature.set_features(features)
 	return new_creature
 	
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_8:
+			get_parent().get_node("Codex").visible = visible
+			visible = !visible

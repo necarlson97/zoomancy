@@ -52,6 +52,8 @@ theme = ExtResource("3_xa2jy")
 text = "progress"
 
 [node name="Scroll" type="Sprite2D" parent="."]
+light_mask = 0
+z_index = 1
 position = Vector2(674, 1392)
 texture = ExtResource("2_wqxg0")
 
@@ -77,6 +79,7 @@ text = "Test Test Test Test Test Test Test Test Test Test Test Test Test "
 fit_content = true
 
 [node name="HappyButton" type="Button" parent="."]
+visible = false
 offset_left = 760.0
 offset_top = 859.0
 offset_right = 778.0
@@ -84,6 +87,7 @@ offset_bottom = 890.0
 text = ":)"
 
 [node name="SadButton" type="Button" parent="."]
+visible = false
 offset_left = 761.0
 offset_top = 822.0
 offset_right = 779.0

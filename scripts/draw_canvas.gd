@@ -26,7 +26,7 @@ func _ready():
 	# Assign buttons
 	$ClearButton.pressed.connect(self.button_clear)
 	
-func _process(delta):
+func _process(_delta):
 	# Sloppy but eh
 	if Grabbable.held == null: equip_nothing()
 	elif Grabbable.held.name == 'Knife': equip_knife()
@@ -39,6 +39,7 @@ func clear():
 
 func button_clear():
 	get_node("ClearButton/GPUParticles2D").restart()
+	$ClearAudio.play()
 	clear()
 	
 func equip_eraser():
@@ -83,3 +84,19 @@ func interpolate_draw(from, to):
 			lerp_pos.y - current_size / 2,
 			current_size, current_size),
 			current_color)
+	
+	if is_vector_within_image(to, draw_image) and Grabbable.held:
+		play_sound()
+
+func is_vector_within_image(vec, image):
+	var image_size = image.get_size()  # Get the size of the image
+	return vec.x >= 0 && vec.x < image_size.x && vec.y >= 0 && vec.y < image_size.y
+
+var can_play = true
+func play_sound():
+	if not can_play: return
+	if current_color == fg_color: $DrawAudio.play()
+	elif current_color == bg_color: $EraseAudio.play()
+	can_play = false
+	await get_tree().create_timer(.25).timeout
+	can_play = true

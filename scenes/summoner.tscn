@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ccbf2dadyl5nq"]
+[gd_scene load_steps=23 format=3 uid="uid://ccbf2dadyl5nq"]
 
 [ext_resource type="Script" path="res://scripts/summoner.gd" id="1_by2su"]
 [ext_resource type="Texture2D" uid="uid://l17pjdxjua4b" path="res://textures/icons/summoning stand.png" id="2_t0ma5"]
@@ -6,7 +6,10 @@
 [ext_resource type="Material" uid="uid://ojc4klftpwsj" path="res://summoner.tres" id="4_ejsn5"]
 [ext_resource type="Texture2D" uid="uid://cdv02kom2sfij" path="res://textures/particles/good.png" id="4_kde45"]
 [ext_resource type="Texture2D" uid="uid://5o21ydaf35h4" path="res://textures/particles/okay.png" id="5_2arym"]
+[ext_resource type="Texture2D" uid="uid://cokpreprvkjjm" path="res://textures/icons/blurred-dot-small.png" id="5_7njv0"]
 [ext_resource type="Texture2D" uid="uid://fnqpck37ytbj" path="res://textures/icons/blurred-dot.png" id="6_4vrm0"]
+[ext_resource type="AudioStream" uid="uid://b8rdb7fyohyss" path="res://audio/sfx/synth.wav" id="9_q1k53"]
+[ext_resource type="AudioStream" uid="uid://dgls72okh3awh" path="res://audio/sfx/synth-bad.wav" id="10_26ej5"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tg0pi"]
 particle_flag_disable_z = true
@@ -84,6 +87,18 @@ angle_max = 20.0
 gravity = Vector3(0, -20, 0)
 scale_curve = SubResource("CurveTexture_4r8vv")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vs4tg"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("9_q1k53")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hsj0q"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("10_26ej5")
+stream_0/weight = 1.0
+
 [node name="Summoner" type="Node2D"]
 script = ExtResource("1_by2su")
 
@@ -94,24 +109,24 @@ texture = ExtResource("2_t0ma5")
 
 [node name="OuterParticles" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 100
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_tg0pi")
 
 [node name="MiddleParticles" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 100
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_hwdkf")
 
 [node name="InnerParticles" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 100
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_6xr5i")
 
 [node name="BloodParticle" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_08i87")
-texture = ExtResource("6_4vrm0")
+texture = ExtResource("5_7njv0")
 lifetime = 3.0
 one_shot = true
 explosiveness = 1.0
@@ -157,3 +172,9 @@ explosiveness = 0.67
 modulate = Color(0, 0, 0, 0)
 scale = Vector2(100, 100)
 texture = ExtResource("6_4vrm0")
+
+[node name="SummonAudio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_vs4tg")
+
+[node name="BadSummonAudio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_hsj0q")

@@ -1,11 +1,35 @@
 extends "res://scripts/dialogue.gd"
 
-func _ready():
-	dialogues = ["TODO SET"]
-	super()
+func check_summon():
+	return Utils.find_by_script(get_tree().root, "creature") != []
 	
+func _ready():
+	$FinalButton.text = "check" # TODO 'next
+	super()
+
+#TODO could randomize text
+var happy_block = TextBlock.new(["I love him! Thanks!"])
+var sad_block = TextBlock.new(["This isn't what I wanted..."])
+var nothing_block = TextBlock.new([], [], [
+	"You haven't summoned anything yet.",
+	"Don't worry! I'll wait.",
+	"Let me know when your ready for me to check what you conjured.",
+], check_summon)
+
 func set_dialogue(difficulty: int, inner: String, middle: String, outer: String):
 	# TODO variants
+	
+	# Some things we want to format a bit nice
+	var translator = {
+		"angel": "extra angel wings",
+		"devil ": "extra devil wings",
+		"backpack": "a backpack",
+		"hat": "a hat",
+	}
+	inner = translator.get(inner, inner)
+	middle = translator.get(middle, middle)
+	outer = translator.get(outer, outer)
+	
 	var diffs = ['easy', 'tricky', 'hard']
 	var request = "I'd like a "+inner
 	if middle != "":
@@ -14,48 +38,32 @@ func set_dialogue(difficulty: int, inner: String, middle: String, outer: String)
 		request += " that is "+outer
 	request += "!"
 	
-	dialogues = [
+	var request_dia = [
 		"Hello! I've got an "+diffs[difficulty]+" one for you.",
 		request,
-		"Let me know when your ready for me to take a look!"
 	]
-	reset()
+	blocks = [TextBlock.new(request_dia)]
 	
-func happy_dialogue():
-	dialogues = [
-		"I love him! Thanks!"
-	]
-	reset()
-	$FinalButton.text = "Goodbye!"
-	$FinalButton.pressed.connect(self.next_client)
-	
-func sad_dialogue():
-	dialogues = [
-		"This isn't what I wanted..."
-	]
-	reset()
-	$FinalButton.text = "...bye"
-	$FinalButton.pressed.connect(self.next_client)
-
-func nothing_dialogue():
-	dialogues = [
-		"You haven't summoned anything yet.",
-		"Don't worry! I'll wait.",
-		"Let me know when your ready for me to check what you conjured.",
-	]
-	reset()
-	$FinalButton.text = "check"
-
 # Check summoning
 @onready var summoner = get_parent().get_parent().get_node("Summoner")
-func on_final():
+func next_block():
 	var result = summoner.client_check(get_parent())
+	print("Next block: %s" % result)
 	if result == "good":
-		happy_dialogue()
+		$FinalButton.text = "Goodbye!"
+		blocks = [happy_block]
 	elif result == "bad":
-		sad_dialogue()
+		$FinalButton.text = "...bye"
+		blocks = [sad_block]
 	else:
-		nothing_dialogue()
+		blocks = [nothing_block]
+	start_typing()
+	check_buttons()
+
+func on_final():
+	print("Final called")
+	if blocks == [happy_block] or blocks == [sad_block]: next_client()
+	else: next_block() 
 	
 func next_client():
 	get_parent().go_away()

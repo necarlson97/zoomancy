@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://x0dycfoom8ks"]
+[gd_scene load_steps=11 format=3 uid="uid://x0dycfoom8ks"]
 
 [ext_resource type="PackedScene" uid="uid://tqk0jocx46ap" path="res://scenes/draw_canvas.tscn" id="1_mvwhm"]
 [ext_resource type="Texture2D" uid="uid://bepxx244ismmm" path="res://textures/icons/bg.png" id="1_qdqlb"]
@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://stujdc35tdyk" path="res://scenes/headmaster.tscn" id="3_6sp8r"]
 [ext_resource type="PackedScene" uid="uid://ccbf2dadyl5nq" path="res://scenes/summoner.tscn" id="5_7d8bt"]
 [ext_resource type="PackedScene" uid="uid://bwlxyqf18tvea" path="res://scenes/referee.tscn" id="6_p7ikd"]
+[ext_resource type="PackedScene" uid="uid://bpj2010t3k47n" path="res://scenes/codex.tscn" id="7_8j2df"]
+[ext_resource type="AudioStream" uid="uid://cqr7dst21ydow" path="res://audio/exhausted-music.wav" id="8_xw74p"]
+[ext_resource type="Script" path="res://scripts/music.gd" id="9_xpyc6"]
+[ext_resource type="Theme" uid="uid://6dtyrbnu1tf6" path="res://new_theme.tres" id="10_cm60u"]
 
 [node name="Main" type="Node2D"]
 
@@ -18,6 +22,9 @@ position = Vector2(233, 124)
 
 [node name="Headmaster" parent="." instance=ExtResource("3_6sp8r")]
 position = Vector2(1179, 6)
+
+[node name="Codex" parent="." instance=ExtResource("7_8j2df")]
+position = Vector2(1130, -2)
 
 [node name="Tutorial" parent="." instance=ExtResource("3_5glmx")]
 position = Vector2(224, 704)
@@ -35,3 +42,18 @@ position = Vector2(977, -273)
 position = Vector2(1313, 755)
 
 [node name="Referee" parent="." instance=ExtResource("6_p7ikd")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_xw74p")
+volume_db = -15.0
+autoplay = true
+script = ExtResource("9_xpyc6")
+
+[node name="Button" type="Button" parent="AudioStreamPlayer2D"]
+offset_left = 17.0
+offset_top = 833.0
+offset_right = 77.0
+offset_bottom = 886.0
+theme = ExtResource("10_cm60u")
+text = "Toggle
+Music"

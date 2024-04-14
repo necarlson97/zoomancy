@@ -21,12 +21,16 @@ text = "Testing Testing Testing Testing Testing Testing Testing Testing Testing 
 autowrap_mode = 2
 
 [node name="Button" type="Button" parent="."]
-offset_left = 468.0
-offset_top = 93.0
-offset_right = 494.0
-offset_bottom = 124.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 462.0
+offset_top = 89.0
+offset_right = 492.0
+offset_bottom = 120.0
+grow_horizontal = 0
 theme = ExtResource("3_estek")
-text = " > "
+text = ">"
 
 [node name="FinalButton" type="Button" parent="."]
 visible = false
@@ -36,3 +40,6 @@ offset_right = 493.0
 offset_bottom = 123.0
 theme = ExtResource("3_estek")
 text = "Final"
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+max_polyphony = 5

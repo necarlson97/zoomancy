@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://d1vn3pj2lg754"]
+[gd_scene load_steps=15 format=3 uid="uid://d1vn3pj2lg754"]
 
 [ext_resource type="Script" path="res://scripts/grabbable.gd" id="1_4faf0"]
 [ext_resource type="Texture2D" uid="uid://gwkqmtdpcuw7" path="res://textures/icons/wetness.png" id="1_beo0m"]
 [ext_resource type="Texture2D" uid="uid://biw8m3i3xsj3b" path="res://textures/icons/sponge.png" id="2_qdfw8"]
-[ext_resource type="Texture2D" uid="uid://fnqpck37ytbj" path="res://textures/icons/blurred-dot.png" id="4_sbf1h"]
+[ext_resource type="Texture2D" uid="uid://cokpreprvkjjm" path="res://textures/icons/blurred-dot-small.png" id="5_ipxfo"]
+[ext_resource type="AudioStream" uid="uid://djlrvjaqr6m3f" path="res://audio/sfx/slosh1.wav" id="5_qmob3"]
+[ext_resource type="AudioStream" uid="uid://c3poawk0ix7dt" path="res://audio/sfx/slosh2.wav" id="6_8tr53"]
+[ext_resource type="AudioStream" uid="uid://bsiaplvnisd4a" path="res://audio/sfx/slosh3.wav" id="7_fwwxw"]
 
 [sub_resource type="Curve" id="Curve_uw4vo"]
 _data = [Vector2(0, 0.843499), 0.0, 0.0, 0, 0, Vector2(0.142857, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -20,8 +23,8 @@ emission_box_extents = Vector3(1, 1, 1)
 direction = Vector3(0, -1, 0)
 initial_velocity_max = 30.0
 gravity = Vector3(0, 98, 0)
-scale_min = 0.01
-scale_max = 0.1
+scale_min = 0.04
+scale_max = 0.4
 scale_curve = SubResource("CurveTexture_uyr5c")
 color = Color(0.788235, 0.854902, 0.972549, 1)
 
@@ -38,10 +41,20 @@ emission_shape_scale = Vector3(30, 10, 1)
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
 gravity = Vector3(0, 98, 0)
-scale_min = 0.01
-scale_max = 0.3
+scale_min = 0.4
+scale_max = 0.6
 scale_curve = SubResource("CurveTexture_3cgr2")
 color = Color(0.788235, 0.854902, 0.972549, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bpm8i"]
+random_pitch = 1.2
+streams_count = 3
+stream_0/stream = ExtResource("5_qmob3")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("6_8tr53")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("7_fwwxw")
+stream_2/weight = 1.0
 
 [node name="SpongeHolder" type="Node2D"]
 
@@ -50,7 +63,7 @@ position = Vector2(5, 25)
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_louws")
-texture = ExtResource("4_sbf1h")
+texture = ExtResource("5_ipxfo")
 lifetime = 1.5
 one_shot = true
 explosiveness = 0.74
@@ -70,4 +83,7 @@ texture = ExtResource("2_qdfw8")
 position = Vector2(-1, 15)
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_bp2g4")
-texture = ExtResource("4_sbf1h")
+texture = ExtResource("5_ipxfo")
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="Sponge"]
+stream = SubResource("AudioStreamRandomizer_bpm8i")

@@ -30,19 +30,18 @@ func _input(event):
 		drop()
 		
 func drop():
-	if $HeldParticles:
-		$HeldParticles.emitting = false
+	if $HeldParticles: $HeldParticles.emitting = false
+	if $Audio: $Audio.play()
 	Grabbable.held = null
 	target = home
-	print("Dropping "+name)
 
 func grab():
-	print("Grabbing "+name)
 	if Grabbable.held != null:
 		Grabbable.held.drop()
 	Grabbable.held = self
 	$HeldParticles.emitting = true
 	get_parent().get_node("GrabParticles").restart()
+	if $Audio: $Audio.play()
 
 func _process(delta):
 	if is_held():

@@ -17,5 +17,5 @@ initial_velocity_min = 80.0
 initial_velocity_max = 100.0
 gravity = Vector3(0, 98, 0)
 scale_min = 0.8
-scale_max = 0.9
+scale_max = 3.2
 scale_curve = SubResource("CurveTexture_3ekcj")

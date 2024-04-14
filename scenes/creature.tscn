@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/creature.gd" id="1_8xjeh"]
 [ext_resource type="Texture2D" uid="uid://yjaslp4p2lu7" path="res://textures/creatures/cat.png" id="1_jskdl"]
 [ext_resource type="Texture2D" uid="uid://d4oayejpvk0k" path="res://textures/creatures/angel.png" id="2_ggfp8"]
-[ext_resource type="Texture2D" uid="uid://bktdxwf4jctc0" path="res://textures/particles/sparkle.png" id="3_1grwo"]
+[ext_resource type="Texture2D" uid="uid://bktdxwf4jctc0" path="res://textures/particles/sparkling.png" id="4_k8qt8"]
 
 [sub_resource type="Curve" id="Curve_rmmqh"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -63,7 +63,7 @@ texture = ExtResource("1_jskdl")
 position = Vector2(1, -91)
 scale = Vector2(0.5, 0.5)
 process_material = SubResource("ParticleProcessMaterial_ya45m")
-texture = ExtResource("3_1grwo")
+texture = ExtResource("4_k8qt8")
 lifetime = 3.0
 
 [node name="BloodParticle" type="GPUParticles2D" parent="."]

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://daaaxd1rjj1ha" path="res://scenes/proctor_outer.tscn" id="4_fyspm"]
 
 [node name="Headmaster" type="Node2D"]
+visible = false
 script = ExtResource("1_euis8")
 
 [node name="ProctorInner" parent="." instance=ExtResource("2_8ccsg")]

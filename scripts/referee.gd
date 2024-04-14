@@ -9,6 +9,7 @@ var res = {
 	"bad": 0,
 	
 	"clients": 0,
+	"summons": 0,
 }
 
 @onready var on_screen = $OnScreen.position
@@ -16,13 +17,14 @@ var res = {
 @onready var target = off_screen
 
 var text_formatter = """%s
-You summoned %s creatures
+
+Summoned %s creatures
 You served %s clientele 
-	[color=#ffffff]%s elated[/color]
-	[color=#ffffff]%s happy[/color]
-	[color=#ffffff]%s satisfied[/color]
-	[color=#ffffff]%s begrudged[/color]
-You unlocked [color=#ffffff]%s / %s [/color] of the Sanguine Codex
+	[color=#FFAF72]%s elated[/color]
+	[color=#C2847A]%s happy[/color]
+	[color=#848586]%s satisfied[/color]
+	[color=#721817]%s begrudged[/color]
+You unlocked [color=#000000]%s / %s [/color] of the Sanguine Codex
 """
 
 func _ready():
@@ -37,29 +39,31 @@ func _ready():
 func _process(delta):
 	$Scroll.position = lerp($Scroll.position, target, delta*10)
 
-func completed_client(was_correct: bool, creature):
-	if was_correct:
-		res["good"] += 1
-		if creature:
-			res[creature.features.score_category()] += 1
-	else:
-		res["bad"] += 1
+func completed_client(was_correct: bool):
+	if was_correct: res["good"] += 1
+	else: res["bad"] += 1
 	res["clients"] += 1
 	set_text()
 	
 	if res["good"]> 0 and res["good"] % 10 == 0:
 		get_on_screen()
 
+func summoned(creature):
+	res["summons"] += 1
+	if creature:
+		res[creature.features.score_category()] += 1
+
 func set_text():
+	var codex = get_parent().get_node("Codex")
 	var text_values = [
 		"Congradulations!" if res["good"] >= 10 else "Looking good",
+		res['summons'],
 		res['clients'],
 		res['perfect'],
 		res['great'],
 		res['okay'],
 		res['bad'],
-		res['bad'],
-		"todo", "todo"
+		codex.get_total_progress(), codex.get_max_progress(),
 	]
 	get_node("Scroll/RichTextLabel").text = text_formatter % text_values
 	
@@ -78,7 +82,10 @@ func keep_playing():
 	
 
 # Debug
-func force_happy():
-	completed_client(true, null)
-func force_sad():
-	completed_client(false, null)
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_9: force_sad()
+		if event.keycode == KEY_0: force_happy()
+		
+func force_happy(): completed_client(true)
+func force_sad(): completed_client(false)

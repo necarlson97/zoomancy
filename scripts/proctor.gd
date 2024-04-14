@@ -1,6 +1,7 @@
 extends Node2D
 
 # Dict of name->image
+@export var given_images = []
 var sub_images = {}
 
 var thread = Thread.new()
@@ -31,15 +32,16 @@ func _ready():
 func load_sub_images():
 	# Get all images for inner/outer/etc
 	var region_name = name.replace("Proctor", "")
-	var path = "res://textures/sub_images/"+region_name+"/"
+	var path = ProjectSettings.globalize_path("res://textures/sub_images/"+region_name+"/")
 	var dir = DirAccess.open(path)
-	dir.list_dir_begin()
+	if not dir: print("Unable to open %s "%path)
 	var file_name = dir.get_next()  
 	while file_name != "":
-		var img = Image.new()
-		if img.load(path+file_name) == OK:
-			sub_images[file_name.replace('.png', '')] = img
-			#print("Loaded: "+region_name+" "+file_name)
+		if file_name.ends_with(".remap"):
+			file_name = file_name.replace(".remap", "")
+		
+		var img = Utils.safe_image_load(path+file_name)
+		if img: sub_images[file_name.replace('.png', '')] = img
 		file_name = dir.get_next()
 
 func check():
@@ -118,8 +120,8 @@ func compare_images(user_image, mask_image, region_size=512, scale_factor=1):
 	var ui = user_image
 	var mi = mask_image
 	if scale_factor != 1:
-		ui = reduce_image_resolution(user_image, scale_factor)
-		mi = reduce_image_resolution(mask_image, scale_factor)
+		ui = Utils.reduce_image_resolution(user_image, scale_factor)
+		mi = Utils.reduce_image_resolution(mask_image, scale_factor)
 
 	# Adjust region size based on scaling factor
 	var scaled_region_size = int(region_size * scale_factor)
@@ -154,12 +156,3 @@ func compare_images(user_image, mask_image, region_size=512, scale_factor=1):
 	#var average = Utils.average([r_ratio, w_ratio])
 	#print("a %s wr %s rr %s m %s" % [average, w_ratio, r_ratio, matching])
 	return r_ratio
-
-
-func reduce_image_resolution(image, scale_factor=0.5):
-	var new_image = Image.new()
-	new_image.copy_from(image)
-	var new_width = int(new_image.get_width() * scale_factor)
-	var new_height = int(image.get_height() * scale_factor)
-	new_image.resize(new_width, new_height)
-	return new_image

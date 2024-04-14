@@ -28,7 +28,7 @@ func client_check(character):
 	current_creature.character = character
 	current_creature = null
 	
-	get_parent().get_node("Referee").completed_client(is_correct, cc)
+	get_parent().get_node("Referee").completed_client(is_correct)
 	
 	if is_correct: return "good"
 	else: return "bad"
@@ -74,6 +74,18 @@ func summon():
 	draw_canvas.clear()
 	score_particles(current_creature)
 	
+	var sc = current_creature.features.score_category()
+	if sc in ["perfect", "great"]: $SummonAudio.play()
+	else: $BadSummonAudio.play()
+	
+	# Add to codex and ref
+	get_parent().get_node("Referee").summoned(current_creature)
+	var codex = get_parent().get_node("Codex")
+	for feature in current_creature.features.feature_array:
+		if sc == "perfect": codex.add_progress(feature, 3)
+		elif sc == "great": codex.add_progress(feature, 2)
+		else: codex.add_progress(feature, 1)
+	
 func set_particle(particle_name, emitting=true):
 	get_node(particle_name+"Particles").emitting = emitting
 	
@@ -81,14 +93,17 @@ func score_particles(creature):
 	var scoreParticles = Utils.title_case(creature.features.score_category())+"Particles"
 	get_node(scoreParticles).restart()
 	
-var blackout_speed = 3
+var blackout_speed = 10
+var target_alpha = 0.0
 func set_blackout(delta):
 	var alpha = $BlackOut.modulate.a
-	alpha = lerp(alpha, 0.0, delta * blackout_speed)
+	alpha = lerp(alpha, target_alpha, delta * blackout_speed)
 	$BlackOut.modulate = Color(0, 0, 0, alpha)
 	
 func blackout():
-	$BlackOut.modulate = Color(0, 0, 0, 0.8)
+	target_alpha = 0.8
+	await get_tree().create_timer(.2).timeout
+	target_alpha = 0.0
 	
 func find_by_script(script_name):
 	return Utils.find_by_script_recursive(get_tree().root, script_name, [])

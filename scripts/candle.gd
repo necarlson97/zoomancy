@@ -8,6 +8,7 @@ func _ready():
 func toggle():
 	lit = !lit
 	set_light()
+	$Audio.play()
 
 func slow_light():
 	lit = true

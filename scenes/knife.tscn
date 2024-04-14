@@ -1,9 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://drcw3lqturd3q"]
+[gd_scene load_steps=17 format=3 uid="uid://drcw3lqturd3q"]
 
 [ext_resource type="Script" path="res://scripts/grabbable.gd" id="1_4lkdu"]
 [ext_resource type="Texture2D" uid="uid://78vqx2myy8s5" path="res://textures/icons/knife.png" id="2_1cbxl"]
 [ext_resource type="Texture2D" uid="uid://c0twodn0e2vim" path="res://textures/icons/Skull.png" id="3_0c15g"]
-[ext_resource type="Texture2D" uid="uid://fnqpck37ytbj" path="res://textures/icons/blurred-dot.png" id="3_f7ixt"]
+[ext_resource type="Texture2D" uid="uid://cokpreprvkjjm" path="res://textures/icons/blurred-dot-small.png" id="3_syoge"]
+[ext_resource type="AudioStream" uid="uid://djlrvjaqr6m3f" path="res://audio/sfx/slosh1.wav" id="4_dtlrv"]
+[ext_resource type="AudioStream" uid="uid://c3poawk0ix7dt" path="res://audio/sfx/slosh2.wav" id="5_adnni"]
+[ext_resource type="Script" path="res://scripts/AutoGrab.gd" id="5_ru6br"]
+[ext_resource type="AudioStream" uid="uid://bsiaplvnisd4a" path="res://audio/sfx/slosh3.wav" id="6_eshhj"]
 
 [sub_resource type="Curve" id="Curve_yohha"]
 _data = [Vector2(0, 0.843499), 0.0, 0.0, 0, 0, Vector2(0.142857, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -18,10 +22,20 @@ emission_shape_scale = Vector3(10, 1, 1)
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
 gravity = Vector3(0, 98, 0)
-scale_min = 0.01
-scale_max = 0.1
+scale_min = 0.04
+scale_max = 0.4
 scale_curve = SubResource("CurveTexture_netf4")
 color = Color(0.447059, 0.0941176, 0.0901961, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_80g2s"]
+random_pitch = 1.2
+streams_count = 3
+stream_0/stream = ExtResource("4_dtlrv")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_adnni")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_eshhj")
+stream_2/weight = 1.0
 
 [sub_resource type="Curve" id="Curve_2smcs"]
 _data = [Vector2(0, 0.843499), 0.0, 0.0, 0, 0, Vector2(0.142857, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -39,10 +53,13 @@ direction = Vector3(0, -1, 0)
 initial_velocity_min = 30.0
 initial_velocity_max = 200.0
 gravity = Vector3(0, 98, 0)
-scale_min = 0.01
-scale_max = 0.1
+scale_min = 0.04
+scale_max = 0.4
 scale_curve = SubResource("CurveTexture_mg2o4")
 color = Color(0.447059, 0.0941176, 0.0901961, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7hsr3"]
+radius = 256.0
 
 [node name="KnifeHolder" type="Node2D"]
 
@@ -60,15 +77,18 @@ offset = Vector2(-33, 128)
 position = Vector2(33, -44)
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_3wsmr")
-texture = ExtResource("3_f7ixt")
+texture = ExtResource("3_syoge")
 lifetime = 1.5
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="Knife"]
+stream = SubResource("AudioStreamRandomizer_80g2s")
 
 [node name="GrabParticles" type="GPUParticles2D" parent="."]
 position = Vector2(1, -86)
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_8cff4")
-texture = ExtResource("3_f7ixt")
+texture = ExtResource("3_syoge")
 lifetime = 1.5
 one_shot = true
 explosiveness = 0.74
@@ -76,3 +96,10 @@ explosiveness = 0.74
 [node name="Face-skull2" type="Sprite2D" parent="."]
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("3_0c15g")
+
+[node name="AutoGrab" type="Area2D" parent="."]
+position = Vector2(512, 0)
+script = ExtResource("5_ru6br")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutoGrab"]
+shape = SubResource("CircleShape2D_7hsr3")
