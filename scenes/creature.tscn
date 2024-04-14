@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://hhorwjmqphlc"]
 
 [ext_resource type="Script" path="res://scripts/creature.gd" id="1_8xjeh"]
-[ext_resource type="Texture2D" uid="uid://dq1vxqcraoqhr" path="res://textures/creatures/cat.png" id="1_jskdl"]
+[ext_resource type="Texture2D" uid="uid://yjaslp4p2lu7" path="res://textures/creatures/cat.png" id="1_jskdl"]
 [ext_resource type="Texture2D" uid="uid://d4oayejpvk0k" path="res://textures/creatures/angel.png" id="2_ggfp8"]
 [ext_resource type="Texture2D" uid="uid://bktdxwf4jctc0" path="res://textures/particles/sparkle.png" id="3_1grwo"]
 

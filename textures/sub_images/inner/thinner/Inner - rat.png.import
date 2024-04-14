@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcgayvrgkkcp8"
-path="res://.godot/imported/Inner - rat.png-3f1513e44438b75239fb6d1fac3ca4dc.ctex"
+uid="uid://c2sx4q8fvktnx"
+path="res://.godot/imported/Inner - rat.png-8c4243668c2094ec4919bc8f8868699d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/sub_images/inner/Inner - rat.png"
-dest_files=["res://.godot/imported/Inner - rat.png-3f1513e44438b75239fb6d1fac3ca4dc.ctex"]
+source_file="res://textures/sub_images/inner/thinner/Inner - rat.png"
+dest_files=["res://.godot/imported/Inner - rat.png-8c4243668c2094ec4919bc8f8868699d.ctex"]
 
 [params]
 

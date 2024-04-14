@@ -22,10 +22,10 @@ func _input(event):
 	if not (event is InputEventMouseButton):
 		return
 	if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		if not is_held() and global_position.distance_to(get_global_mouse_position()) < radius:
+		if not is_held() and home.distance_to(get_global_mouse_position()) < radius:
 			grab()
 		elif is_held() and global_position.distance_to(home) < radius:
-				drop()
+			drop()
 	elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		drop()
 		
@@ -34,9 +34,11 @@ func drop():
 		$HeldParticles.emitting = false
 	Grabbable.held = null
 	target = home
+	print("Dropping "+name)
 
 func grab():
-	if Grabbable.held:
+	print("Grabbing "+name)
+	if Grabbable.held != null:
 		Grabbable.held.drop()
 	Grabbable.held = self
 	$HeldParticles.emitting = true

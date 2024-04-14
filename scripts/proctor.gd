@@ -6,9 +6,13 @@ var sub_images = {}
 var thread = Thread.new()
 var stop_thread = false
 
+# To speed things up, we don't need to check whole image,
+# for inner, we need only check the middle 128 or whatever
+@export var size = 512
+
 # A candatate for which image fits best
 class BestFit:
-	var score = 0.01
+	var score = 0.05
 	var image = null
 	var name = ""
 var current_best_fit = BestFit.new()
@@ -75,13 +79,15 @@ func find_best_fit() -> BestFit:
 	var best_fit = BestFit.new()
 	for sub_name in sub_images:
 		var sub_image = sub_images[sub_name]
-		var score = compare_images(user_image, sub_image)
-		#print("Comapring to "+str(sub_name)+" = "+str(score))
+		var score = compare_images(user_image, sub_image, size)
+		print("Comapring to "+str(sub_name)+" = "+str(score))
 		if score > best_fit.score:
 			best_fit.score = score
 			best_fit.image = sub_image
 			best_fit.name = sub_name.split('- ')[-1]
-			
+	print("Best fit "+str(best_fit.name)+" = "+str(best_fit.score))
+	print()
+	
 	# For the pixels in the deisred region, show them on the 'UserRect'
 	user_display.call_deferred(
 		"set_texture", ImageTexture.create_from_image(user_image))
@@ -92,8 +98,7 @@ func find_best_fit() -> BestFit:
 			"set_texture", ImageTexture.create_from_image(best_fit.image))
 		# Just for testing
 		#best_fit.image.save_png("res://temp_best.png")
-	else:
-		best_display.call_deferred("set_texture", null)
+	else: best_display.call_deferred("set_texture", null)
 		
 	return best_fit
 
@@ -109,21 +114,38 @@ func create_from_mask(image, mask):
 				
 	return result_image
 
-func compare_images(user_image, mask_image):
-	var ui = reduce_image_resolution(user_image)
-	var mi = reduce_image_resolution(mask_image)
-	
+func compare_images(user_image, mask_image, region_size=512, scale_factor=1):
+	var ui = user_image
+	var mi = mask_image
+	if scale_factor != 1:
+		ui = reduce_image_resolution(user_image, scale_factor)
+		mi = reduce_image_resolution(mask_image, scale_factor)
+
+	# Adjust region size based on scaling factor
+	var scaled_region_size = int(region_size * scale_factor)
+	var width = ui.get_width()
+	var height = ui.get_height()
+
+	# Calculate the start and end points for the middle region, adjusted for scaling
+	var start_x = max((width - scaled_region_size) / 2, 0)
+	var start_y = max((height - scaled_region_size) / 2, 0)
+	var end_x = min(start_x + scaled_region_size, width)
+	var end_y = min(start_y + scaled_region_size, height)
+
 	var score = 0.0
 	var total_red = 0
-	for x in range(ui.get_width()):
-		for y in range(ui.get_height()):
+	for x in range(start_x, end_x):
+		for y in range(start_y, end_y):
 			var user_pixel = ui.get_pixel(x, y)
 			var mask_pixel = mi.get_pixel(x, y)
 			if mask_pixel == Color.RED:
 				total_red += 1
-				if user_pixel == Color.WHITE:
-					score += 1
-	return score / total_red
+				if user_pixel == Color.WHITE: score += 1
+			elif user_pixel == Color.WHITE: score -= 1
+
+	if total_red == 0: return 0
+	return score  / total_red
+
 
 func reduce_image_resolution(image, scale_factor=0.5):
 	var new_image = Image.new()

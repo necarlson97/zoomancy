@@ -71,7 +71,7 @@ position = Vector2(253, -73)
 position = Vector2(483, 5)
 
 [node name="Sponge Holder" parent="." instance=ExtResource("10_d73df")]
-position = Vector2(-100, 253)
+position = Vector2(-100, 252)
 
 [node name="KnifeHolder" parent="." instance=ExtResource("8_lxhcr")]
 position = Vector2(-69, 533)
