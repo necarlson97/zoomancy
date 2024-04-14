@@ -80,13 +80,13 @@ func find_best_fit() -> BestFit:
 	for sub_name in sub_images:
 		var sub_image = sub_images[sub_name]
 		var score = compare_images(user_image, sub_image, size)
-		print("Comapring to "+str(sub_name)+" = "+str(score))
+		#print("Comapring to "+str(sub_name)+" = "+str(score))
 		if score > best_fit.score:
 			best_fit.score = score
 			best_fit.image = sub_image
 			best_fit.name = sub_name.split('- ')[-1]
-	print("Best fit "+str(best_fit.name)+" = "+str(best_fit.score))
-	print()
+	#print("Best fit "+str(best_fit.name)+" = "+str(best_fit.score))
+	#print()
 	
 	# For the pixels in the deisred region, show them on the 'UserRect'
 	user_display.call_deferred(
@@ -132,19 +132,28 @@ func compare_images(user_image, mask_image, region_size=512, scale_factor=1):
 	var end_x = min(start_x + scaled_region_size, width)
 	var end_y = min(start_y + scaled_region_size, height)
 
-	var score = 0.0
+	var matching = 0.0
 	var total_red = 0
+	var total_white = 0
 	for x in range(start_x, end_x):
 		for y in range(start_y, end_y):
 			var user_pixel = ui.get_pixel(x, y)
 			var mask_pixel = mi.get_pixel(x, y)
-			if mask_pixel == Color.RED:
-				total_red += 1
-				if user_pixel == Color.WHITE: score += 1
-			elif user_pixel == Color.WHITE: score -= 1
-
-	if total_red == 0: return 0
-	return score  / total_red
+			#if mask_pixel == Color.RED:
+				#total_red += 1
+				#if user_pixel == Color.WHITE: score += 1
+			#elif user_pixel == Color.WHITE: score -= 1
+			var was_white = (user_pixel == Color.WHITE)
+			var was_red = (mask_pixel == Color.RED)
+			if was_white: total_white += 1
+			if was_red: total_red += 1
+			if was_white and was_red: matching += 1
+			
+	var r_ratio = matching / max(total_red, 1)
+	#var w_ratio = matching / max(total_white, 1)
+	#var average = Utils.average([r_ratio, w_ratio])
+	#print("a %s wr %s rr %s m %s" % [average, w_ratio, r_ratio, matching])
+	return r_ratio
 
 
 func reduce_image_resolution(image, scale_factor=0.5):

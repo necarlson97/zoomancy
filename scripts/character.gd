@@ -4,30 +4,31 @@ extends Node2D
 var inners = {
 	"cat": 0,
 	"rat": 0,
-	#"dog": 0,
+	"dog": 0,
 	"bird": 0,
 	"bat": 1,
 	"rabbit": 1,
-	#"frog": 1,
-	#"turtle": 1,
-	#"deer": 2,
-	#"cow": 2,
+	"frog": 1,
+	"turtle": 1,
+	"deer": 2,
+	"cow": 2,
+	"blob": 3,
 }
 var middles = {
 	"": 0,
-	#"hat": 0,
+	"hat": 0,
 	"angel": 0,
 	"devil": 0,
-	#"backpack": 1,
+	"backpack": 1,
 	"horns": 1,
 	"antlers": 1,
-	#"horns antlers wings": 2,
+	"horns antlers wings": 2,
 }
 var outers = {
 	"": 0,
 	"sparkling": 1,
 	"flaming": 1,
-	#"toxic": 1,
+	"toxic": 1,
 	"electic": 2,
 	"icy": 2,
 }
@@ -43,16 +44,36 @@ var speed = 10
 var difficulty = 0
 var request = ["rat", "", ""]
 
+static var images = []
+
 func _ready():
+	images = load_images()
+	$Sprite.texture = ImageTexture.create_from_image(choose(images))
+	
 	difficulty = get_new_difficulty()
 	position = waiting
 	request = self.generate_request()
 	print("Requesting "+str(request))
 	$RequestDialogue.set_dialogue(difficulty, request[0], request[1], request[2])
 	
+func load_images():
+	if images != []:
+		return images
+	var path = "res://textures/characters/"
+	var dir = DirAccess.open(path)
+	dir.list_dir_begin()
+	var file_name = dir.get_next()  
+	while file_name != "":
+		var img = Image.new()
+		if img.load(path+file_name) == OK:
+			images.append(img)
+			print("Character image: "+file_name)
+		file_name = dir.get_next()
+	return images
+	
 func get_new_difficulty():
 	var successes = get_parent().get_node("Referee").res['good']
-	var max_difficulty = int(successes / 3)
+	var max_difficulty = int(successes / 4)
 	print("max_difficulty: "+str(max_difficulty))
 	if max_difficulty == 0:
 		return 0

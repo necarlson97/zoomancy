@@ -23,7 +23,7 @@ func client_check(character):
 	var fc = cc.features
 	var is_correct = fc.check_request(character.request)
 	
-	score_particles(current_creature)
+	if is_correct: score_particles(current_creature)
 	
 	current_creature.character = character
 	current_creature = null

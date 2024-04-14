@@ -41,13 +41,13 @@ func completed_client(was_correct: bool, creature):
 	if was_correct:
 		res["good"] += 1
 		if creature:
-			res[creature.feature.score_category()] += 1
+			res[creature.features.score_category()] += 1
 	else:
 		res["bad"] += 1
 	res["clients"] += 1
 	set_text()
 	
-	if res["good"] % 10 == 0:
+	if res["good"]> 0 and res["good"] % 10 == 0:
 		get_on_screen()
 
 func set_text():

@@ -44,10 +44,10 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="ClearButton" type="Button" parent="."]
-offset_left = 447.0
-offset_top = 389.0
-offset_right = 680.0
-offset_bottom = 624.0
+offset_left = -202.0
+offset_top = -18.0
+offset_right = -75.0
+offset_bottom = 169.0
 icon = ExtResource("4_rg632")
 flat = true
 expand_icon = true
@@ -71,7 +71,7 @@ position = Vector2(253, -73)
 position = Vector2(483, 5)
 
 [node name="Sponge Holder" parent="." instance=ExtResource("10_d73df")]
-position = Vector2(-100, 252)
+position = Vector2(-103, 263)
 
 [node name="KnifeHolder" parent="." instance=ExtResource("8_lxhcr")]
-position = Vector2(-69, 533)
+position = Vector2(-63, 565)

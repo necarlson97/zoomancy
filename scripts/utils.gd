@@ -18,14 +18,15 @@ class CreatureFeatures:
 		return r[0] == inner and r[1] == middle and r[2] == outer
 		
 	func score_category():
-		if score > 0.5: return "perfect"
-		elif score > 0.2: return "great"
+		if score > 0.4: return "perfect"
+		elif score > 0.1: return "great"
 		else: return "okay"
 		
 	func _to_string():
 		return inner+", "+middle+", "+outer+" ("+str(score)+")"
 
 static func average(numbers: Array) -> float:
+	if (numbers.size() == 0): return 0
 	var sum := 0.0
 	for n in numbers:
 		sum += n

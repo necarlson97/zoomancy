@@ -43,7 +43,8 @@ func check_all():
 	for n in proctors:
 		var best = n.check()
 		names.append(best.name)
-		scores.append(best.score)
+		if best.name != "":
+			scores.append(best.score)
 	
 	if names[0] == "":
 		names[0] = "blob"
