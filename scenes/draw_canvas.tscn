@@ -1,14 +1,32 @@
-[gd_scene load_steps=10 format=3 uid="uid://tqk0jocx46ap"]
+[gd_scene load_steps=12 format=3 uid="uid://tqk0jocx46ap"]
 
-[ext_resource type="Script" path="res://scripts/DrawCanvas.gd" id="1_3fa3r"]
+[ext_resource type="Script" path="res://scripts/draw_canvas.gd" id="1_3fa3r"]
 [ext_resource type="Texture2D" uid="uid://7uoqb0wqawel" path="res://textures/icons/Canvas.png" id="2_cmcjd"]
 [ext_resource type="Texture2D" uid="uid://cyeh8i06svuje" path="res://textures/icons/altar stand.png" id="2_w4cyx"]
-[ext_resource type="Texture2D" uid="uid://c5oi8l2tg4j4" path="res://textures/icons/face-skull.webp" id="4_foh33"]
-[ext_resource type="Texture2D" uid="uid://pmpgci32hxjw" path="res://textures/icons/cockroach.webp" id="5_g125e"]
-[ext_resource type="Texture2D" uid="uid://biw8m3i3xsj3b" path="res://textures/icons/sponge.png" id="6_40myk"]
-[ext_resource type="Texture2D" uid="uid://bis61b85y52kf" path="res://textures/icons/roach-jar.webp" id="6_yubuu"]
+[ext_resource type="Texture2D" uid="uid://dbh5mg6q8hv3p" path="res://textures/icons/roach jar.png" id="4_rg632"]
+[ext_resource type="Texture2D" uid="uid://i83glnonw051" path="res://textures/icons/roach.png" id="5_52a43"]
 [ext_resource type="PackedScene" uid="uid://dtd87dr7ijejh" path="res://scenes/candle.tscn" id="8_jl40j"]
-[ext_resource type="Texture2D" uid="uid://78vqx2myy8s5" path="res://textures/icons/knife.png" id="8_ry5xr"]
+[ext_resource type="PackedScene" uid="uid://drcw3lqturd3q" path="res://scenes/knife.tscn" id="8_lxhcr"]
+[ext_resource type="PackedScene" uid="uid://d1vn3pj2lg754" path="res://scenes/sponge.tscn" id="10_d73df"]
+
+[sub_resource type="Curve" id="Curve_7kxie"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.173745, 1), 0.0, 0.0, 0, 0, Vector2(0.833977, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_yx3tt"]
+curve = SubResource("Curve_7kxie")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tcprp"]
+particle_flag_disable_z = true
+angle_min = 30.0
+angle_max = 60.0
+direction = Vector3(-1, -0.5, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.4
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_yx3tt")
 
 [node name="DrawCanvas" type="Node2D"]
 script = ExtResource("1_3fa3r")
@@ -25,43 +43,23 @@ texture = ExtResource("2_cmcjd")
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Face-skull2" type="Sprite2D" parent="."]
-position = Vector2(-7, 534.18)
-scale = Vector2(0.201172, 0.201172)
-texture = ExtResource("4_foh33")
-
-[node name="Cockroach2" type="Sprite2D" parent="."]
-position = Vector2(603, 490)
-scale = Vector2(0.15332, 0.15332)
-texture = ExtResource("5_g125e")
-
 [node name="ClearButton" type="Button" parent="."]
-offset_left = 416.0
-offset_top = 465.0
-offset_right = 524.0
-offset_bottom = 574.0
-icon = ExtResource("6_yubuu")
-expand_icon = true
-
-[node name="EraserButton" type="Button" parent="."]
-offset_left = -167.0
-offset_top = 208.0
-offset_right = -33.0
-offset_bottom = 304.0
-icon = ExtResource("6_40myk")
+offset_left = 447.0
+offset_top = 389.0
+offset_right = 680.0
+offset_bottom = 624.0
+icon = ExtResource("4_rg632")
 flat = true
 expand_icon = true
 
-[node name="KnifeButton" type="Button" parent="."]
-offset_left = 11.1317
-offset_top = 497.68
-offset_right = 71.1317
-offset_bottom = 606.68
-rotation = -3.38804
-scale = Vector2(1.37816, 1.37816)
-icon = ExtResource("8_ry5xr")
-flat = true
-expand_icon = true
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ClearButton"]
+position = Vector2(118, 32)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_tcprp")
+texture = ExtResource("5_52a43")
+one_shot = true
+explosiveness = 0.3
 
 [node name="Candle" parent="." instance=ExtResource("8_jl40j")]
 position = Vector2(18, 14)
@@ -71,3 +69,9 @@ position = Vector2(253, -73)
 
 [node name="Candle3" parent="." instance=ExtResource("8_jl40j")]
 position = Vector2(483, 5)
+
+[node name="Sponge Holder" parent="." instance=ExtResource("10_d73df")]
+position = Vector2(-100, 253)
+
+[node name="KnifeHolder" parent="." instance=ExtResource("8_lxhcr")]
+position = Vector2(-69, 533)

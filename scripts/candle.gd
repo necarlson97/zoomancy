@@ -1,6 +1,6 @@
 extends Node2D
 
-var lit = false
+var lit = true
 func _ready():
 	$Button.pressed.connect(self.toggle)
 	set_light()
@@ -9,9 +9,9 @@ func toggle():
 	lit = !lit
 	set_light()
 
-func slow_unlight():
+func slow_light():
+	lit = true
 	await get_tree().create_timer(0.2).timeout  
-	lit = false
 	set_light()
 
 func set_light():

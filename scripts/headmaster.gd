@@ -1,4 +1,5 @@
 extends Node2D
+class_name Headmaster
 
 #TODO what combinations do we want?
 # Inner (animal)
@@ -31,28 +32,8 @@ extends Node2D
 # toxic - small circle - hard
 # electic - 8 poly - hard
 # icy - 8 star - hard
-
-class CreatureFeatures:
-	var inner = "Blob"
-	var middle = ""
-	var outer = ""
-	var score = 0.0
-	
-	func _init(features: Array, score: float):
-		if features.size() >= 3:
-			self.inner = features[0]
-			self.middle = features[1]
-			self.outer = features[2]
-		self.score = score
-
 func _ready():
 	$Button.pressed.connect(self.check_all)
-
-func average(numbers: Array) -> float:
-	var sum := 0.0
-	for n in numbers:
-		sum += n
-	return sum / numbers.size()
 
 @onready var proctors = [$ProctorInner, $ProctorMiddle, $ProctorOuter]
 func check_all():
@@ -67,17 +48,16 @@ func check_all():
 	if names[0] == "":
 		names[0] = "blob"
 	
-	var final_score = average(scores)
+	var final_score = Utils.average(scores)
 	print("Final: "+str(final_score)+" "+str(names))
 	
 	# pack to send off
-	return CreatureFeatures.new(names, final_score)
+	return Utils.CreatureFeatures.new(names, final_score)
 
 @onready var creature = preload("res://scenes/creature.tscn")
 func evauluate_creature():
 	var features = self.check_all()
 	var new_creature = creature.instantiate()
-	#new_creature.visible = false
-	new_creature.set_features(features.inner, features.middle, features.outer)
+	new_creature.set_features(features)
 	return new_creature
 	

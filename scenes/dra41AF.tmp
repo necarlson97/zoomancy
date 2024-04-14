@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://tqk0jocx46ap"]
+
+[ext_resource type="Script" path="res://scripts/draw_canvas.gd" id="1_3fa3r"]
+[ext_resource type="Texture2D" uid="uid://7uoqb0wqawel" path="res://textures/icons/Canvas.png" id="2_cmcjd"]
+[ext_resource type="Texture2D" uid="uid://cyeh8i06svuje" path="res://textures/icons/altar stand.png" id="2_w4cyx"]
+[ext_resource type="Texture2D" uid="uid://pmpgci32hxjw" path="res://textures/icons/cockroach.webp" id="5_g125e"]
+[ext_resource type="Texture2D" uid="uid://bis61b85y52kf" path="res://textures/icons/roach-jar.webp" id="6_yubuu"]
+[ext_resource type="PackedScene" uid="uid://dtd87dr7ijejh" path="res://scenes/candle.tscn" id="8_jl40j"]
+[ext_resource type="PackedScene" uid="uid://drcw3lqturd3q" path="res://scenes/knife.tscn" id="8_lxhcr"]
+[ext_resource type="PackedScene" uid="uid://d1vn3pj2lg754" path="res://scenes/sponge.tscn" id="10_d73df"]
+
+[node name="DrawCanvas" type="Node2D"]
+script = ExtResource("1_3fa3r")
+
+[node name="AltarStand" type="Sprite2D" parent="."]
+position = Vector2(253, 336)
+texture = ExtResource("2_w4cyx")
+
+[node name="Canvas" type="Sprite2D" parent="."]
+position = Vector2(256, 256)
+texture = ExtResource("2_cmcjd")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Cockroach2" type="Sprite2D" parent="."]
+position = Vector2(603, 490)
+scale = Vector2(0.15332, 0.15332)
+texture = ExtResource("5_g125e")
+
+[node name="ClearButton" type="Button" parent="."]
+offset_left = 416.0
+offset_top = 465.0
+offset_right = 524.0
+offset_bottom = 574.0
+icon = ExtResource("6_yubuu")
+expand_icon = true
+
+[node name="Candle" parent="." instance=ExtResource("8_jl40j")]
+position = Vector2(18, 14)
+
+[node name="Candle2" parent="." instance=ExtResource("8_jl40j")]
+position = Vector2(253, -73)
+
+[node name="Candle3" parent="." instance=ExtResource("8_jl40j")]
+position = Vector2(483, 5)
+
+[node name="Sponge Holder" parent="." instance=ExtResource("10_d73df")]
+position = Vector2(-100, 253)
+
+[node name="KnifeHolder" parent="." instance=ExtResource("8_lxhcr")]
+position = Vector2(-14, 533)

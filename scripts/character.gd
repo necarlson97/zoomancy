@@ -32,31 +32,56 @@ var outers = {
 	"icy": 2,
 }
 
+var speed = 10
+
 # Positions
-var waiting = Vector2(256, 512+260)
-var present = Vector2(256, 256)
-var gone = Vector2(256, -260)
-var target = waiting
+@onready var waiting = get_parent().get_node("CharacterWait").position
+@onready var standing = get_parent().get_node("CharacterStand").position
+@onready var gone = get_parent().get_node("CharacterGone").position
+@onready var target = standing
 
 var difficulty = 0
 var request = ["rat", "", ""]
 
 func _ready():
+	difficulty = get_new_difficulty()
+	position = waiting
 	request = self.generate_request()
+	print("Requesting "+str(request))
 	$RequestDialogue.set_dialogue(difficulty, request[0], request[1], request[2])
+	
+func get_new_difficulty():
+	var successes = get_parent().get_node("Referee").res['good']
+	var max_difficulty = int(successes / 3)
+	print("max_difficulty: "+str(max_difficulty))
+	if max_difficulty == 0:
+		return 0
+	return randi() % max_difficulty
 
 func _process(delta):
-	self.position = lerp(self.position, target, delta)
+	position = lerp(position, target, delta * speed)
 
 func generate_request():
 	# Generate a summoning request for 0 easy, 1 medium, 2 hard
 	var is_easier = func is_easier(key):
 		return key <= self.difficulty
-	var ins = inners.values().filter(is_easier)
-	var mids = middles.values().filter(is_easier)
-	var outs = outers.values().filter(is_easier)
+	var ins = filter_dict(inners, is_easier)
+	var mids = filter_dict(middles, is_easier)
+	var outs = filter_dict(outers, is_easier)
 	return [choose(ins), choose(mids), choose(outs)]
 
-func choose(dict):
-	var values = dict.values()
-	return values[randi() % values.size()]
+func filter_dict(dict, predicate):
+	var result = []
+	for k in dict.keys():
+		var v = dict[k]
+		if predicate.call(v):  # Apply the predicate to the value
+			result.append(k)
+	return result
+	
+func choose(arr):
+	return arr[randi() % arr.size()]
+
+func go_away():
+	target = gone
+	await get_tree().create_timer(1).timeout
+	queue_free()

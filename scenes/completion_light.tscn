@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce7t04b2jdvhe"]
+
+[ext_resource type="Script" path="res://scripts/soft_pulse.gd" id="1_bsake"]
+[ext_resource type="Texture2D" uid="uid://fnqpck37ytbj" path="res://textures/icons/blurred-dot.png" id="1_x5a77"]
+
+[node name="CompletionLight" type="Node2D"]
+
+[node name="bg" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.363281, 0.363281)
+texture = ExtResource("1_x5a77")
+
+[node name="fg" type="Sprite2D" parent="."]
+scale = Vector2(0.320313, 0.320313)
+texture = ExtResource("1_x5a77")
+script = ExtResource("1_bsake")

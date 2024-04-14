@@ -9,14 +9,18 @@
 script = ExtResource("1_euis8")
 
 [node name="ProctorInner" parent="." instance=ExtResource("2_8ccsg")]
+visible = false
 
 [node name="ProctorMiddle" parent="." instance=ExtResource("3_dtup6")]
+visible = false
 position = Vector2(0, 170)
 
 [node name="ProctorOuter" parent="." instance=ExtResource("4_fyspm")]
+visible = false
 position = Vector2(0, 340)
 
 [node name="Button" type="Button" parent="."]
+visible = false
 offset_left = 4.0
 offset_top = 513.0
 offset_right = 255.0

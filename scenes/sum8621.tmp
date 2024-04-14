@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccbf2dadyl5nq"]
+
+[ext_resource type="Script" path="res://scripts/summoner.gd" id="1_by2su"]
+[ext_resource type="Texture2D" uid="uid://l17pjdxjua4b" path="res://textures/icons/summoning stand.png" id="2_t0ma5"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tg0pi"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 80.0
+emission_ring_inner_radius = 80.0
+gravity = Vector3(0, -20, 0)
+color = Color(1, 0.109804, 0.109804, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hwdkf"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 60.0
+emission_ring_inner_radius = 60.0
+gravity = Vector3(0, -20, 0)
+color = Color(1, 0.439216, 0.439216, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6xr5i"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 30.0
+emission_ring_inner_radius = 30.0
+gravity = Vector3(0, -20, 0)
+
+[node name="Summoner" type="Node2D"]
+script = ExtResource("1_by2su")
+
+[node name="SummoningStand" type="Sprite2D" parent="."]
+position = Vector2(0, 13)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_t0ma5")
+
+[node name="OuterParticles" type="GPUParticles2D" parent="."]
+visible = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_tg0pi")
+
+[node name="MiddleParticles" type="GPUParticles2D" parent="."]
+visible = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_hwdkf")
+
+[node name="InnerParticles" type="GPUParticles2D" parent="."]
+visible = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_6xr5i")

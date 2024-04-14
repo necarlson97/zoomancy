@@ -17,12 +17,24 @@ func _ready():
 	$Button.pressed.connect(self.next_click)
 	$FinalButton.pressed.connect(self.on_final)
 	start_typing()
+	
+func reset():
+	current_dialogue_index = 0
+	chars_displayed = 0
+	is_typing = false
+	$Button.visible = true
+	$FinalButton.visible = false
+	start_typing()
+	check_click()
 
 func _process(delta):
 	if is_typing:
 		type_out(delta)
 
 func type_out(delta):
+	if current_dialogue_index >= dialogues.size():
+		return
+		
 	if chars_displayed < dialogues[current_dialogue_index].length():
 		chars_displayed += 1
 		text_label.text = dialogues[current_dialogue_index].substr(0, chars_displayed)
@@ -36,10 +48,12 @@ func next_click():
 		text_label.text = dialogues[current_dialogue_index]
 		is_typing = false
 		return
-
 	# Move to next dialogue
 	current_dialogue_index += 1
 	start_typing()
+	check_click()
+
+func check_click():
 	if current_dialogue_index >= dialogues.size()-1:
 		$Button.visible = false
 		$FinalButton.visible = true

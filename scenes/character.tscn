@@ -21,11 +21,14 @@ func _process(delta):
 [node name="Character" type="Node2D"]
 script = ExtResource("1_2djju")
 
-[node name="Satyr" type="Sprite2D" parent="."]
-position = Vector2(256, 256)
-scale = Vector2(0.5, 0.5)
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_fnijc")
 script = SubResource("GDScript_k1b14")
 
 [node name="RequestDialogue" parent="." instance=ExtResource("3_350x0")]
-position = Vector2(4, 514)
+position = Vector2(-196, 173)
+scale = Vector2(0.8, 0.8)
+
+[node name="Holster" type="Node2D" parent="."]
+position = Vector2(159, 84)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://x0dycfoom8ks"]
+[gd_scene load_steps=7 format=3 uid="uid://x0dycfoom8ks"]
 
 [ext_resource type="PackedScene" uid="uid://tqk0jocx46ap" path="res://scenes/draw_canvas.tscn" id="1_mvwhm"]
 [ext_resource type="Texture2D" uid="uid://bepxx244ismmm" path="res://textures/icons/bg.png" id="1_qdqlb"]
 [ext_resource type="PackedScene" uid="uid://43jrniauw6sx" path="res://scenes/tutorial.tscn" id="3_5glmx"]
 [ext_resource type="PackedScene" uid="uid://stujdc35tdyk" path="res://scenes/headmaster.tscn" id="3_6sp8r"]
 [ext_resource type="PackedScene" uid="uid://ccbf2dadyl5nq" path="res://scenes/summoner.tscn" id="5_7d8bt"]
+[ext_resource type="PackedScene" uid="uid://bwlxyqf18tvea" path="res://scenes/referee.tscn" id="6_p7ikd"]
 
 [node name="Main" type="Node2D"]
 
@@ -21,5 +22,16 @@ position = Vector2(1179, 6)
 [node name="Tutorial" parent="." instance=ExtResource("3_5glmx")]
 position = Vector2(103, 721)
 
+[node name="CharacterStand" type="Node2D" parent="."]
+position = Vector2(979, 390)
+
+[node name="CharacterWait" type="Node2D" parent="."]
+position = Vector2(1005, 1175)
+
+[node name="CharacterGone" type="Node2D" parent="."]
+position = Vector2(977, -273)
+
 [node name="Summoner" parent="." instance=ExtResource("5_7d8bt")]
 position = Vector2(1313, 755)
+
+[node name="Referee" parent="." instance=ExtResource("6_p7ikd")]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clalpoyux8vc8"
-path="res://.godot/imported/perfect.png-7dac1bfeae573ab6242102c221cab302.ctex"
+uid="uid://c0twodn0e2vim"
+path="res://.godot/imported/Skull.png-b3d4f633e4910decd8c80204271b5d06.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/icons/perfect.png"
-dest_files=["res://.godot/imported/perfect.png-7dac1bfeae573ab6242102c221cab302.ctex"]
+source_file="res://textures/icons/Skull.png"
+dest_files=["res://.godot/imported/Skull.png-b3d4f633e4910decd8c80204271b5d06.ctex"]
 
 [params]
 

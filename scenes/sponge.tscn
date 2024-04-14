@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://d1vn3pj2lg754"]
+
+[ext_resource type="Script" path="res://scripts/grabbable.gd" id="1_4faf0"]
+[ext_resource type="Texture2D" uid="uid://gwkqmtdpcuw7" path="res://textures/icons/wetness.png" id="1_beo0m"]
+[ext_resource type="Texture2D" uid="uid://biw8m3i3xsj3b" path="res://textures/icons/sponge.png" id="2_qdfw8"]
+[ext_resource type="Texture2D" uid="uid://fnqpck37ytbj" path="res://textures/icons/blurred-dot.png" id="4_sbf1h"]
+
+[sub_resource type="Curve" id="Curve_uw4vo"]
+_data = [Vector2(0, 0.843499), 0.0, 0.0, 0, 0, Vector2(0.142857, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_uyr5c"]
+curve = SubResource("Curve_uw4vo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_louws"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(40, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, -1, 0)
+initial_velocity_max = 30.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.01
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_uyr5c")
+color = Color(0.788235, 0.854902, 0.972549, 1)
+
+[sub_resource type="Curve" id="Curve_82l2y"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.362934, 0.488764), 0.0, 0.0, 0, 0, Vector2(0.984556, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3cgr2"]
+curve = SubResource("Curve_82l2y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bp2g4"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(30, 10, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, 98, 0)
+scale_min = 0.01
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_3cgr2")
+color = Color(0.788235, 0.854902, 0.972549, 1)
+
+[node name="SpongeHolder" type="Node2D"]
+
+[node name="GrabParticles" type="GPUParticles2D" parent="."]
+position = Vector2(5, 25)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_louws")
+texture = ExtResource("4_sbf1h")
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.74
+
+[node name="Wetness" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_beo0m")
+
+[node name="Sponge" type="Node2D" parent="."]
+script = ExtResource("1_4faf0")
+
+[node name="Sprite" type="Sprite2D" parent="Sponge"]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_qdfw8")
+
+[node name="HeldParticles" type="GPUParticles2D" parent="Sponge"]
+position = Vector2(-1, 15)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_bp2g4")
+texture = ExtResource("4_sbf1h")

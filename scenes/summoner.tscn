@@ -1,11 +1,159 @@
-[gd_scene load_steps=3 format=3 uid="uid://ccbf2dadyl5nq"]
+[gd_scene load_steps=18 format=3 uid="uid://ccbf2dadyl5nq"]
 
 [ext_resource type="Script" path="res://scripts/summoner.gd" id="1_by2su"]
 [ext_resource type="Texture2D" uid="uid://l17pjdxjua4b" path="res://textures/icons/summoning stand.png" id="2_t0ma5"]
+[ext_resource type="Texture2D" uid="uid://clalpoyux8vc8" path="res://textures/particles/perfect.png" id="3_dvt5q"]
+[ext_resource type="Material" uid="uid://ojc4klftpwsj" path="res://summoner.tres" id="4_ejsn5"]
+[ext_resource type="Texture2D" uid="uid://cdv02kom2sfij" path="res://textures/particles/good.png" id="4_kde45"]
+[ext_resource type="Texture2D" uid="uid://5o21ydaf35h4" path="res://textures/particles/okay.png" id="5_2arym"]
+[ext_resource type="Texture2D" uid="uid://fnqpck37ytbj" path="res://textures/icons/blurred-dot.png" id="6_4vrm0"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tg0pi"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 80.0
+emission_ring_inner_radius = 80.0
+gravity = Vector3(0, -20, 0)
+scale_max = 5.0
+color = Color(1, 0.109804, 0.109804, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hwdkf"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 60.0
+emission_ring_inner_radius = 60.0
+gravity = Vector3(0, -20, 0)
+scale_max = 5.0
+color = Color(1, 0.439216, 0.439216, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6xr5i"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 30.0
+emission_ring_inner_radius = 30.0
+gravity = Vector3(0, -20, 0)
+scale_max = 5.0
+
+[sub_resource type="Curve" id="Curve_gae06"]
+_data = [Vector2(0.027027, 1), 0.0, 0.0, 0, 0, Vector2(0.494208, 0.582665), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_tkv6u"]
+_data = [Vector2(0.162162, 0.749599), 0.0, 0.0, 0, 0, Vector2(0.949807, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_stvi5"]
+curve_x = SubResource("Curve_gae06")
+curve_y = SubResource("Curve_tkv6u")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_08i87"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 34.17
+direction = Vector3(0, -1, 0)
+directional_velocity_min = -3000.0
+directional_velocity_max = 500.0
+directional_velocity_curve = SubResource("CurveXYZTexture_stvi5")
+gravity = Vector3(0, 1000, 0)
+scale_min = 0.1
+scale_max = 0.5
+color = Color(0.54902, 0, 0, 1)
+
+[sub_resource type="Curve" id="Curve_spgy0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.212355, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4r8vv"]
+curve = SubResource("Curve_spgy0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eba55"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 80.0
+emission_ring_inner_radius = 80.0
+angle_min = -20.0
+angle_max = 20.0
+gravity = Vector3(0, -20, 0)
+scale_curve = SubResource("CurveTexture_4r8vv")
 
 [node name="Summoner" type="Node2D"]
 script = ExtResource("1_by2su")
 
 [node name="SummoningStand" type="Sprite2D" parent="."]
+position = Vector2(0, 13)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("2_t0ma5")
+
+[node name="OuterParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_tg0pi")
+
+[node name="MiddleParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_hwdkf")
+
+[node name="InnerParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_6xr5i")
+
+[node name="BloodParticle" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_08i87")
+texture = ExtResource("6_4vrm0")
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+
+[node name="SummonParticle" type="GPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 20
+process_material = ExtResource("4_ejsn5")
+texture = ExtResource("6_4vrm0")
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.75
+
+[node name="PerfectParticles" type="GPUParticles2D" parent="."]
+z_index = 2
+emitting = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_eba55")
+texture = ExtResource("3_dvt5q")
+one_shot = true
+explosiveness = 0.67
+
+[node name="GreatParticles" type="GPUParticles2D" parent="."]
+z_index = 2
+emitting = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_eba55")
+texture = ExtResource("4_kde45")
+one_shot = true
+explosiveness = 0.67
+
+[node name="OkayParticles" type="GPUParticles2D" parent="."]
+z_index = 2
+emitting = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_eba55")
+texture = ExtResource("5_2arym")
+one_shot = true
+explosiveness = 0.67
+
+[node name="BlackOut" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0)
+scale = Vector2(100, 100)
+texture = ExtResource("6_4vrm0")

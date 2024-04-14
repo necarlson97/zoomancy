@@ -4,7 +4,7 @@ extends Node2D
 var draw_texture: ImageTexture
 var draw_image: Image
 var brush_size: int = 4
-var eraser_size: int = 20
+var eraser_size: int = 50
 
 # Colors
 var bg_color = Color.TRANSPARENT
@@ -24,15 +24,23 @@ func _ready():
 	clear()
 	
 	# Assign buttons
-	$ClearButton.pressed.connect(self.clear)
-	$EraserButton.pressed.connect(self.equip_eraser)
-	$KnifeButton.pressed.connect(self.equip_knife)
+	$ClearButton.pressed.connect(self.button_clear)
+	
+func _process(delta):
+	# Sloppy but eh
+	if Grabbable.held == null: equip_nothing()
+	elif Grabbable.held.name == 'Knife': equip_knife()
+	elif Grabbable.held.name == 'Sponge': equip_eraser()
+	else: equip_nothing()
 	
 func clear():
 	draw_image.fill(bg_color)
 	draw_texture.set_image(draw_image)
+
+func button_clear():
+	get_node("ClearButton/GPUParticles2D").restart()
+	clear()
 	
-# TODO have knife/eraser follow player, and lerp home when not equipped
 func equip_eraser():
 	current_color = bg_color
 	current_size = eraser_size
@@ -40,6 +48,10 @@ func equip_eraser():
 func equip_knife():
 	current_color = fg_color
 	current_size = brush_size
+
+func equip_nothing():
+	current_color = bg_color
+	current_size = 0
 
 func _input(event):
 	if "position" not in event:
@@ -53,6 +65,8 @@ func _input(event):
 		last_pos = pos
 
 func update_drawing(pos):
+	if brush_size == 0:
+		return
 	if last_pos != null:
 		interpolate_draw(last_pos, pos)
 	draw_texture.set_image(draw_image)
