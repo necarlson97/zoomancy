@@ -1,8 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtu7ngde8sjut"]
+[gd_scene load_steps=11 format=3 uid="uid://dtu7ngde8sjut"]
 
 [ext_resource type="Script" path="res://scripts/character.gd" id="1_2djju"]
 [ext_resource type="Texture2D" uid="uid://d3wmulbvuwnnd" path="res://textures/characters/Hooded.png" id="2_3b4mo"]
+[ext_resource type="Texture2D" uid="uid://cx18nmuc2vt2d" path="res://textures/characters/dwarf.png" id="2_hfqu2"]
 [ext_resource type="PackedScene" uid="uid://bvqghfmgh4b6d" path="res://scenes/request_dialogue.tscn" id="3_350x0"]
+[ext_resource type="Texture2D" uid="uid://b5deauya7mopt" path="res://textures/characters/elf.png" id="3_ig0li"]
+[ext_resource type="Texture2D" uid="uid://b78tkw2efqc0c" path="res://textures/characters/fairy.png" id="4_mk6xl"]
+[ext_resource type="Texture2D" uid="uid://80mslvi0gxjq" path="res://textures/characters/orc.png" id="6_cnabo"]
+[ext_resource type="Texture2D" uid="uid://cmeh2sbf6cwb8" path="res://textures/characters/satyr.png" id="7_5ra7k"]
+[ext_resource type="Texture2D" uid="uid://0bx3og4t0hv7" path="res://textures/characters/Troll.png" id="8_i2twf"]
 
 [sub_resource type="GDScript" id="GDScript_k1b14"]
 script/source = "extends Sprite2D
@@ -20,6 +26,7 @@ func _process(delta):
 
 [node name="Character" type="Node2D"]
 script = ExtResource("1_2djju")
+textures = Array[Texture]([ExtResource("2_hfqu2"), ExtResource("3_ig0li"), ExtResource("4_mk6xl"), ExtResource("2_3b4mo"), ExtResource("6_cnabo"), ExtResource("7_5ra7k"), ExtResource("8_i2twf")])
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.8, 0.8)

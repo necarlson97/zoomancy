@@ -1,23 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://stujdc35tdyk"]
+[gd_scene load_steps=26 format=3 uid="uid://stujdc35tdyk"]
 
 [ext_resource type="Script" path="res://scripts/headmaster.gd" id="1_euis8"]
 [ext_resource type="PackedScene" uid="uid://dsbc74b7vwac1" path="res://scenes/proctor.tscn" id="2_8ccsg"]
 [ext_resource type="PackedScene" uid="uid://kt16eu83nos3" path="res://scenes/proctor_middle.tscn" id="3_dtup6"]
+[ext_resource type="Texture2D" uid="uid://bnsv0niwol2ff" path="res://textures/sub_images/inner/Inner - bat.png" id="3_k8tqw"]
+[ext_resource type="Texture2D" uid="uid://dqhsk0nmdl0km" path="res://textures/sub_images/inner/Inner - bird.png" id="4_1u4mb"]
 [ext_resource type="PackedScene" uid="uid://daaaxd1rjj1ha" path="res://scenes/proctor_outer.tscn" id="4_fyspm"]
+[ext_resource type="Texture2D" uid="uid://disxkkanu1npb" path="res://textures/sub_images/inner/Inner - cat.png" id="5_e7r8s"]
+[ext_resource type="Texture2D" uid="uid://b1h4wnvofq0pd" path="res://textures/sub_images/inner/Inner - cow.png" id="6_tcvf2"]
+[ext_resource type="Texture2D" uid="uid://ca075ehqh5su3" path="res://textures/sub_images/inner/Inner - deer.png" id="7_rgkgc"]
+[ext_resource type="Texture2D" uid="uid://dxsd6ebqy1lit" path="res://textures/sub_images/inner/Inner - dog.png" id="8_t1dau"]
+[ext_resource type="Texture2D" uid="uid://oghw30oooey2" path="res://textures/sub_images/inner/Inner - frog.png" id="9_7ue4f"]
+[ext_resource type="Texture2D" uid="uid://1vplubl0hi1r" path="res://textures/sub_images/inner/Inner - rabbit.png" id="10_480d6"]
+[ext_resource type="Texture2D" uid="uid://dcgayvrgkkcp8" path="res://textures/sub_images/inner/Inner - rat.png" id="11_wbdtr"]
+[ext_resource type="Texture2D" uid="uid://6tfe10bch2ah" path="res://textures/sub_images/inner/Inner - turtle.png" id="12_bifdi"]
+[ext_resource type="Texture2D" uid="uid://ctevtcihcb0v5" path="res://textures/sub_images/middle/Middle - angel.png" id="14_3cgbb"]
+[ext_resource type="Texture2D" uid="uid://duooumfs2n0qu" path="res://textures/sub_images/middle/Middle - antlers.png" id="15_p6fpq"]
+[ext_resource type="Texture2D" uid="uid://kyiwr8xitr4" path="res://textures/sub_images/middle/Middle - backpack.png" id="16_vwe1c"]
+[ext_resource type="Texture2D" uid="uid://lw0kb3kxq5ho" path="res://textures/sub_images/middle/Middle - devil.png" id="17_dmjie"]
+[ext_resource type="Texture2D" uid="uid://d3oescbw06eew" path="res://textures/sub_images/middle/Middle - hat.png" id="18_vjde3"]
+[ext_resource type="Texture2D" uid="uid://b517ymi2shvog" path="res://textures/sub_images/middle/Middle - horns.png" id="19_rt4v0"]
+[ext_resource type="Texture2D" uid="uid://cblotrl8pblca" path="res://textures/sub_images/outer/Outer - electric.png" id="21_8v03b"]
+[ext_resource type="Texture2D" uid="uid://yl3sqhwnu0pw" path="res://textures/sub_images/outer/Outer - flaming.png" id="22_0yism"]
+[ext_resource type="Texture2D" uid="uid://da0fh0pv8xuwn" path="res://textures/sub_images/outer/Outer - icy.png" id="23_opw6p"]
+[ext_resource type="Texture2D" uid="uid://dybocr0rfyvos" path="res://textures/sub_images/outer/Outer - sparkling.png" id="24_nywy5"]
+[ext_resource type="Texture2D" uid="uid://cyrvrm2qhid2f" path="res://textures/sub_images/outer/Outer - toxic.png" id="25_gi161"]
 
 [node name="Headmaster" type="Node2D"]
 visible = false
 script = ExtResource("1_euis8")
 
 [node name="ProctorInner" parent="." instance=ExtResource("2_8ccsg")]
+given_textures = Array[Texture]([ExtResource("3_k8tqw"), ExtResource("4_1u4mb"), ExtResource("5_e7r8s"), ExtResource("6_tcvf2"), ExtResource("7_rgkgc"), ExtResource("8_t1dau"), ExtResource("9_7ue4f"), ExtResource("10_480d6"), ExtResource("11_wbdtr"), ExtResource("12_bifdi")])
 size = 180
 
 [node name="ProctorMiddle" parent="." instance=ExtResource("3_dtup6")]
 position = Vector2(0, 170)
+given_textures = Array[Texture]([ExtResource("14_3cgbb"), ExtResource("15_p6fpq"), ExtResource("16_vwe1c"), ExtResource("17_dmjie"), ExtResource("18_vjde3"), ExtResource("19_rt4v0")])
 size = 336
 
 [node name="ProctorOuter" parent="." instance=ExtResource("4_fyspm")]
 position = Vector2(0, 340)
+given_textures = Array[Texture]([ExtResource("21_8v03b"), ExtResource("22_0yism"), ExtResource("23_opw6p"), ExtResource("24_nywy5"), ExtResource("25_gi161")])
 
 [node name="Button" type="Button" parent="."]
 offset_left = 4.0

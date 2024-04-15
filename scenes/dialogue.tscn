@@ -1,8 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://di642ovb0hqgs"]
+[gd_scene load_steps=14 format=3 uid="uid://di642ovb0hqgs"]
 
 [ext_resource type="Script" path="res://scripts/dialogue.gd" id="1_b0qlb"]
 [ext_resource type="Texture2D" uid="uid://cv5wcrm2jouyg" path="res://textures/icons/dialogue box.png" id="2_3frlj"]
 [ext_resource type="Theme" uid="uid://6dtyrbnu1tf6" path="res://new_theme.tres" id="3_estek"]
+[ext_resource type="AudioStream" uid="uid://c7qo67ydacf51" path="res://audio/speech/b.wav" id="4_syp3a"]
+[ext_resource type="AudioStream" uid="uid://d1hvfj423tpbo" path="res://audio/speech/cwav.wav" id="5_m7j4f"]
+[ext_resource type="AudioStream" uid="uid://68kuiw2ipiq" path="res://audio/speech/d.wav" id="6_xh8cq"]
+[ext_resource type="AudioStream" uid="uid://s6x0xfolov4r" path="res://audio/speech/dwav.wav" id="7_himht"]
+[ext_resource type="AudioStream" uid="uid://11qu77gsiw8a" path="res://audio/speech/e.wav" id="8_eebkf"]
+[ext_resource type="AudioStream" uid="uid://ccwdepewmq3uv" path="res://audio/speech/ee.wav" id="9_frpg3"]
+[ext_resource type="AudioStream" uid="uid://bqciogn7w21iq" path="res://audio/speech/g.wav" id="10_1kryb"]
+[ext_resource type="AudioStream" uid="uid://c8r1jyvmnfbn3" path="res://audio/speech/k.wav" id="11_t4mfj"]
+[ext_resource type="AudioStream" uid="uid://hg30k2xqy7w2" path="res://audio/speech/l.wav" id="12_52shb"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5ocgu"]
+streams_count = 10
+stream_0/stream = ExtResource("4_syp3a")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_m7j4f")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_xh8cq")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("7_himht")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("8_eebkf")
+stream_4/weight = 1.0
+stream_5/stream = ExtResource("8_eebkf")
+stream_5/weight = 1.0
+stream_6/stream = ExtResource("9_frpg3")
+stream_6/weight = 1.0
+stream_7/stream = ExtResource("10_1kryb")
+stream_7/weight = 1.0
+stream_8/stream = ExtResource("11_t4mfj")
+stream_8/weight = 1.0
+stream_9/stream = ExtResource("12_52shb")
+stream_9/weight = 1.0
 
 [node name="Dialogue" type="Node2D"]
 script = ExtResource("1_b0qlb")
@@ -42,4 +74,5 @@ theme = ExtResource("3_estek")
 text = "Final"
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_5ocgu")
 max_polyphony = 5

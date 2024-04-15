@@ -60,14 +60,8 @@ static func title_case(s):
 static func reduce_image_resolution(image, scale_factor=0.5):
 	var new_image = Image.new()
 	new_image.copy_from(image)
+	new_image.convert(Image.FORMAT_RGBA8)
 	var new_width = int(new_image.get_width() * scale_factor)
 	var new_height = int(image.get_height() * scale_factor)
 	new_image.resize(new_width, new_height)
 	return new_image
-
-static func safe_image_load(filepath):
-	var image = Image.new()
-	image.load(ProjectSettings.globalize_path(filepath))
-	# TODO hacky?
-	if image.is_empty(): return null
-	return image

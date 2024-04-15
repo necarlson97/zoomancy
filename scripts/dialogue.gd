@@ -35,7 +35,6 @@ class TextBlock:
 		
 		hopper = all_dialogue.duplicate()
 		if passed_check == [] and failed_check == []:
-			print("No pass / fail, will move on")
 			passed = true
 	
 	func next() -> String:
@@ -69,7 +68,6 @@ var blocks = [TextBlock.new()]
 func _ready():
 	$Button.pressed.connect(self.next_click)
 	$FinalButton.pressed.connect(self.on_final)
-	_load_audio_clips()
 	start_typing()
 
 func _process(delta):
@@ -132,28 +130,12 @@ func start_typing():
 	text_label.text = ""
 	
 # Handle audio
-var audio_clips = []
-@onready var audio_player = $Audio
 var can_play = true
 var pitch_start = randf_range(0.6, 1.3)
 func _play_sound_for_letter():
 	if not can_play: return
-	var clip = audio_clips[randi() % audio_clips.size()]
-	audio_player.stream = clip
-	audio_player.pitch_scale = pitch_start + randf_range(-0.1, 0.1)
-	audio_player.play()
+	$Audio.pitch_scale = pitch_start + randf_range(-0.1, 0.1)
+	$Audio.play()
 	can_play = false
-	await get_tree().create_timer(.2).timeout
+	await get_tree().create_timer(.3).timeout
 	can_play = true
-
-func _load_audio_clips():
-	var dir = DirAccess.open(ProjectSettings.globalize_path("res://audio/speech"))
-	dir.list_dir_begin()
-	var file_name = dir.get_next()
-	while file_name != "":
-		if file_name.ends_with(".mp3") or file_name.ends_with(".wav"):
-			var path = ProjectSettings.globalize_path("res://audio/speech/" + file_name)
-			var clip = load(path)
-			audio_clips.append(clip)
-		file_name = dir.get_next()
-	dir.list_dir_end()

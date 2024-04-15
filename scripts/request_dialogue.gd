@@ -4,17 +4,17 @@ func check_summon():
 	return Utils.find_by_script(get_tree().root, "creature") != []
 	
 func _ready():
-	$FinalButton.text = "check" # TODO 'next
+	$FinalButton.text = "check"
 	super()
 
 #TODO could randomize text
 var happy_block = TextBlock.new(["I love him! Thanks!"])
 var sad_block = TextBlock.new(["This isn't what I wanted..."])
-var nothing_block = TextBlock.new([], [], [
-	"You haven't summoned anything yet.",
-	"Don't worry! I'll wait.",
+var nothing_text = [
+	"You haven't summoned anything yet. Don't worry! I'll wait.",
 	"Let me know when your ready for me to check what you conjured.",
-], check_summon)
+]
+var nothing_block = TextBlock.new([], [], nothing_text, check_summon)
 
 func set_dialogue(difficulty: int, inner: String, middle: String, outer: String):
 	# TODO variants
@@ -22,7 +22,7 @@ func set_dialogue(difficulty: int, inner: String, middle: String, outer: String)
 	# Some things we want to format a bit nice
 	var translator = {
 		"angel": "extra angel wings",
-		"devil ": "extra devil wings",
+		"devil": "extra devil wings",
 		"backpack": "a backpack",
 		"hat": "a hat",
 	}
@@ -42,8 +42,9 @@ func set_dialogue(difficulty: int, inner: String, middle: String, outer: String)
 		"Hello! I've got an "+diffs[difficulty]+" one for you.",
 		request,
 	]
+	nothing_text.append(request)
 	blocks = [TextBlock.new(request_dia)]
-	
+
 # Check summoning
 @onready var summoner = get_parent().get_parent().get_node("Summoner")
 func next_block():
@@ -61,7 +62,6 @@ func next_block():
 	check_buttons()
 
 func on_final():
-	print("Final called")
 	if blocks == [happy_block] or blocks == [sad_block]: next_client()
 	else: next_block() 
 	

@@ -47,6 +47,7 @@ texture = ExtResource("1_01w1w")
 centered = false
 
 [node name="CreatureImage" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 1)
 texture_filter = 1
 layout_mode = 0
 offset_left = 99.0

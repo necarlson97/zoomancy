@@ -39,19 +39,22 @@ func _ready():
 func _process(delta):
 	$Scroll.position = lerp($Scroll.position, target, delta*10)
 
+var last_shown = 0 
 func completed_client(was_correct: bool):
 	if was_correct: res["good"] += 1
 	else: res["bad"] += 1
 	res["clients"] += 1
 	set_text()
 	
-	if res["good"]> 0 and res["good"] % 10 == 0:
+	if res["good"] != last_shown and res["good"] % 10 == 0:
 		get_on_screen()
+		last_shown = res["good"]
 
 func summoned(creature):
 	res["summons"] += 1
 	if creature:
 		res[creature.features.score_category()] += 1
+
 
 func set_text():
 	var codex = get_parent().get_node("Codex")

@@ -43,32 +43,16 @@ var speed = 10
 var difficulty = 0
 var request = ["rat", "", ""]
 
-static var images = []
+@export var textures: Array[Texture] = []
 
 func _ready():
-	images = load_images()
-	$Sprite.texture = ImageTexture.create_from_image(choose(images))
+	$Sprite.texture = choose(textures)
 	
 	difficulty = get_new_difficulty()
 	position = waiting
 	request = self.generate_request()
 	print("Requesting "+str(request))
 	$RequestDialogue.set_dialogue(difficulty, request[0], request[1], request[2])
-	
-func load_images():
-	if images != []:
-		return images
-	var path = ProjectSettings.globalize_path("res://textures/characters/")
-	var dir = DirAccess.open(path)
-	dir.list_dir_begin()
-	var file_name = dir.get_next()  
-	while file_name != "":
-		var img = Image.new()
-		if img.load(path+file_name) == OK:
-			images.append(img)
-			print("Character image: "+file_name)
-		file_name = dir.get_next()
-	return images
 	
 func get_new_difficulty():
 	var successes = get_parent().get_node("Referee").res['good']

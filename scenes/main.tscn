@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://x0dycfoom8ks"]
+[gd_scene load_steps=38 format=3 uid="uid://x0dycfoom8ks"]
 
 [ext_resource type="PackedScene" uid="uid://tqk0jocx46ap" path="res://scenes/draw_canvas.tscn" id="1_mvwhm"]
 [ext_resource type="Texture2D" uid="uid://bepxx244ismmm" path="res://textures/icons/bg.png" id="1_qdqlb"]
@@ -10,8 +10,39 @@
 [ext_resource type="AudioStream" uid="uid://cqr7dst21ydow" path="res://audio/exhausted-music.wav" id="8_xw74p"]
 [ext_resource type="Script" path="res://scripts/music.gd" id="9_xpyc6"]
 [ext_resource type="Theme" uid="uid://6dtyrbnu1tf6" path="res://new_theme.tres" id="10_cm60u"]
+[ext_resource type="Script" path="res://scripts/texture_holder.gd" id="11_2sxcj"]
+[ext_resource type="Texture2D" uid="uid://d4oayejpvk0k" path="res://textures/creatures/angel.png" id="12_adl52"]
+[ext_resource type="Texture2D" uid="uid://dhxg2w0rgchfr" path="res://textures/creatures/antlers.png" id="13_rqs14"]
+[ext_resource type="Texture2D" uid="uid://46854ed2itub" path="res://textures/creatures/backpack.png" id="14_xiu5l"]
+[ext_resource type="Texture2D" uid="uid://dnhmu4vymq5l6" path="res://textures/creatures/bat.png" id="15_jh0w4"]
+[ext_resource type="Texture2D" uid="uid://cfc74yswhxb1m" path="res://textures/creatures/bird.png" id="16_jpgp8"]
+[ext_resource type="Texture2D" uid="uid://d22kxo63le2ox" path="res://textures/creatures/blob.png" id="17_ul8vk"]
+[ext_resource type="Texture2D" uid="uid://yjaslp4p2lu7" path="res://textures/creatures/cat.png" id="18_56dwm"]
+[ext_resource type="Texture2D" uid="uid://cq033wpildil" path="res://textures/creatures/combo.png" id="19_btt0b"]
+[ext_resource type="Texture2D" uid="uid://dgy0ju5m5dxe8" path="res://textures/particles/electric.png" id="20_5xu4n"]
+[ext_resource type="Texture2D" uid="uid://csagd57jwmvd3" path="res://textures/creatures/cow.png" id="20_tfa2u"]
+[ext_resource type="Texture2D" uid="uid://cg5iwkdv0645m" path="res://textures/creatures/deer.png" id="21_2hcip"]
+[ext_resource type="Texture2D" uid="uid://5n6egyyja2q3" path="res://textures/particles/flaming.png" id="21_86jlm"]
+[ext_resource type="Texture2D" uid="uid://bumt5w3rxplea" path="res://textures/creatures/devil.png" id="22_ibus5"]
+[ext_resource type="Texture2D" uid="uid://cdv02kom2sfij" path="res://textures/particles/good.png" id="22_sokhq"]
+[ext_resource type="Texture2D" uid="uid://cec1ro3m6cwyh" path="res://textures/creatures/dog.png" id="23_54nww"]
+[ext_resource type="Texture2D" uid="uid://d1me5nd0ruk2s" path="res://textures/particles/icy.png" id="23_p78y0"]
+[ext_resource type="Texture2D" uid="uid://c47ak7f7hpf1u" path="res://textures/creatures/frog.png" id="24_gstka"]
+[ext_resource type="Texture2D" uid="uid://5o21ydaf35h4" path="res://textures/particles/okay.png" id="24_r0bnd"]
+[ext_resource type="Texture2D" uid="uid://clalpoyux8vc8" path="res://textures/particles/perfect.png" id="25_ikq8e"]
+[ext_resource type="Texture2D" uid="uid://o4wrgfmhxuy" path="res://textures/creatures/hat.png" id="25_vqjpe"]
+[ext_resource type="Texture2D" uid="uid://b4og2pbplim5o" path="res://textures/creatures/horns.png" id="26_ecbhq"]
+[ext_resource type="Texture2D" uid="uid://bktdxwf4jctc0" path="res://textures/particles/sparkling.png" id="26_n12q0"]
+[ext_resource type="Texture2D" uid="uid://db7m00efqiobo" path="res://textures/particles/toxic.png" id="27_h5ryw"]
+[ext_resource type="Texture2D" uid="uid://b8kprfne3it3l" path="res://textures/creatures/rabbit.png" id="27_ssefw"]
+[ext_resource type="Texture2D" uid="uid://bx8mojkmalpx0" path="res://textures/creatures/rat.png" id="28_12cf0"]
+[ext_resource type="Texture2D" uid="uid://8a2h5aluk16p" path="res://textures/creatures/turtle.png" id="29_mtf0e"]
 
 [node name="Main" type="Node2D"]
+
+[node name="AllCreatures" type="Node2D" parent="."]
+script = ExtResource("11_2sxcj")
+textures = Array[Texture]([ExtResource("12_adl52"), ExtResource("13_rqs14"), ExtResource("14_xiu5l"), ExtResource("15_jh0w4"), ExtResource("16_jpgp8"), ExtResource("17_ul8vk"), ExtResource("18_56dwm"), ExtResource("19_btt0b"), ExtResource("20_tfa2u"), ExtResource("21_2hcip"), ExtResource("22_ibus5"), ExtResource("23_54nww"), ExtResource("24_gstka"), ExtResource("25_vqjpe"), ExtResource("26_ecbhq"), ExtResource("27_ssefw"), ExtResource("28_12cf0"), ExtResource("29_mtf0e"), ExtResource("20_5xu4n"), ExtResource("21_86jlm"), ExtResource("22_sokhq"), ExtResource("23_p78y0"), ExtResource("24_r0bnd"), ExtResource("25_ikq8e"), ExtResource("26_n12q0"), ExtResource("27_h5ryw")])
 
 [node name="Bg" type="Sprite2D" parent="."]
 position = Vector2(720, 450)

@@ -18,7 +18,7 @@ corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ps4kp"]
-bg_color = Color(0, 0, 0, 0.85098)
+bg_color = Color(0, 0, 0, 0.533333)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50

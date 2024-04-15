@@ -1,7 +1,7 @@
 extends Node2D
 
 # Dict of name->image
-@export var given_images = []
+@export var given_textures: Array[Texture] = []
 var sub_images = {}
 
 var thread = Thread.new()
@@ -32,17 +32,10 @@ func _ready():
 func load_sub_images():
 	# Get all images for inner/outer/etc
 	var region_name = name.replace("Proctor", "")
-	var path = ProjectSettings.globalize_path("res://textures/sub_images/"+region_name+"/")
-	var dir = DirAccess.open(path)
-	if not dir: print("Unable to open %s "%path)
-	var file_name = dir.get_next()  
-	while file_name != "":
-		if file_name.ends_with(".remap"):
-			file_name = file_name.replace(".remap", "")
-		
-		var img = Utils.safe_image_load(path+file_name)
-		if img: sub_images[file_name.replace('.png', '')] = img
-		file_name = dir.get_next()
+	for tex in given_textures:
+		var image_name = tex.get_path().get_file().replace('.png', '')
+		image_name = image_name.split('- ')[-1]
+		sub_images[image_name] = tex.get_image()
 
 func check():
 	# Compare those desired pixels with an existing list of sub-images,
