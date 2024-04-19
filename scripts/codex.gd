@@ -30,7 +30,7 @@ class Entry:
 	
 	func convert_mask(mask):
 		# Convert a mask to something easier for the user to see
-		var image = Utils.reduce_image_resolution(mask, 0.25)
+		var image = Utils.reduce_image_resolution(mask, 0.3)
 		for x in range(image.get_width()):
 			for y in range(image.get_height()):
 				var pixel = image.get_pixel(x, y)
