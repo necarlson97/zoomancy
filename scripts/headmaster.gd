@@ -30,7 +30,7 @@ class_name Headmaster
 # sparkling - square - medium
 # flaming - diamond - medium
 # toxic - small circle - hard
-# electic - 8 poly - hard
+# electric - 8 poly - hard
 # icy - 8 star - hard
 func _ready():
 	$Button.pressed.connect(self.check_all)

@@ -28,7 +28,7 @@ var outers = {
 	"sparkling": 1,
 	"flaming": 1,
 	"toxic": 1,
-	"electic": 2,
+	"electric": 2,
 	"icy": 2,
 }
 

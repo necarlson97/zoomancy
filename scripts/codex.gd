@@ -36,6 +36,7 @@ class Entry:
 				var pixel = image.get_pixel(x, y)
 				
 				if pixel == Color.WHITE: image.set_pixel(x, y, Color.BLACK)
+				elif pixel == Color.html('#727476'): continue
 				elif pixel == Color.RED: image.set_pixel(x, y, Color.html("#721817"))
 				else: image.set_pixel(x, y, Color.TRANSPARENT)
 		
